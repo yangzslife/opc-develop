@@ -2,6 +2,8 @@
 
 opc-develop is a Chinese-first Codex plugin suite for controlled AI-assisted product development. It packages a Lite flow for small changes, a Full flow for product/design/technical/development loops, and Harness initialization/evaluation skills.
 
+![OPC-Develop skills workflow](assets/opc-develop-skills.png)
+
 The suite is intentionally opinionated:
 
 - Chinese-first user-visible output.
