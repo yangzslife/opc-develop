@@ -1,0 +1,6 @@
+interface:
+  display_name: "create-plan"
+  short_description: "创建并行计划树"
+  default_prompt: "使用 $create-plan 在测试用例评审通过后创建计划树，并保持中文输出。"
+policy:
+  allow_implicit_invocation: true

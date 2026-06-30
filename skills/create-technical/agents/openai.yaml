@@ -1,0 +1,6 @@
+interface:
+  display_name: "create-technical"
+  short_description: "创建技术设计"
+  default_prompt: "使用 $create-technical 在 PRD 评审通过后创建技术设计，并保持中文输出。"
+policy:
+  allow_implicit_invocation: true

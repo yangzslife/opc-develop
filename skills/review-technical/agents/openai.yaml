@@ -1,0 +1,6 @@
+interface:
+  display_name: "review-technical"
+  short_description: "独立子代理评审技术设计"
+  default_prompt: "使用 $review-technical 通过独立评审子代理评审技术设计，并保持中文输出。"
+policy:
+  allow_implicit_invocation: true

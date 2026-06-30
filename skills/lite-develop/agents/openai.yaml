@@ -1,0 +1,4 @@
+interface:
+  display_name: "lite-develop"
+  short_description: "在当前分支快速开发验证并人工打磨小需求"
+  default_prompt: "使用 $lite-develop 在当前分支处理这个小需求；简单需求直接改，较复杂需求再按需创建临时 worktree。"

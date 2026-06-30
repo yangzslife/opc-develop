@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harness Eval"
+  short_description: "Evaluate project harness maturity and gaps"
+  default_prompt: "Use $harness-eval to evaluate this repository's harness maturity and produce a scored report."

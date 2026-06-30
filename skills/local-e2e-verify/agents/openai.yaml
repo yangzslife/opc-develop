@@ -1,0 +1,4 @@
+interface:
+  display_name: "local-e2e-verify"
+  short_description: "本地执行黑盒 E2E Acceptance Regression 验证"
+  default_prompt: "使用 $local-e2e-verify 在 tdd-coding 后执行本地黑盒 E2E、验收和回归验证。"

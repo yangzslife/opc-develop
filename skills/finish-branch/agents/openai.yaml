@@ -1,0 +1,4 @@
+interface:
+  display_name: "finish-branch"
+  short_description: "分支 linked worktree 或 detached HEAD 完成后安全收尾"
+  default_prompt: "使用 $finish-branch 检查当前分支或 worktree 状态，并按项目军规完成合并、推送或交接收尾。"

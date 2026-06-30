@@ -1,0 +1,6 @@
+interface:
+  display_name: "create-spec"
+  short_description: "创建可执行规格"
+  default_prompt: "使用 $create-spec 在技术设计评审通过后创建规格说明，并保持中文输出。"
+policy:
+  allow_implicit_invocation: true

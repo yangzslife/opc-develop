@@ -1,0 +1,4 @@
+interface:
+  display_name: "tdd-coding"
+  short_description: "子代理执行 Unit Test 与 API Test 驱动开发闭环"
+  default_prompt: "使用 $tdd-coding 基于 spec、plan 和黑盒用例参考执行 UT/API TDD 开发。"

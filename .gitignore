@@ -1,0 +1,23 @@
+.DS_Store
+
+# Local editor and tool state
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local environment and secrets
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+
+# Generated caches
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Codex local runtime/cache state must not be published from this repo.
+.codex/
+.agents/

@@ -1,0 +1,6 @@
+interface:
+  display_name: "review-plan"
+  short_description: "独立子代理评审计划树"
+  default_prompt: "使用 $review-plan 通过独立评审子代理评审计划树，并保持中文输出。"
+policy:
+  allow_implicit_invocation: true

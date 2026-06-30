@@ -1,0 +1,6 @@
+interface:
+  display_name: "build-technical"
+  short_description: "编排 create-technical 与 review-technical 的闭环优化流程"
+  default_prompt: "使用 $build-technical 一次完成技术方案创建、评审和必要优化。"
+policy:
+  allow_implicit_invocation: true
