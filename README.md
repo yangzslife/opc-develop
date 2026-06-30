@@ -15,6 +15,24 @@ opc-develop is a Codex / Claude Code skill suite for controlled AI-assisted prod
 - Treats Harness as a first-class concern: documentation, testcases, runtime evidence, local E2E, and release verification are part of the workflow.
 - Requires SaaS/infrastructure decisions in technical design; MySQL is the default SaaS database baseline unless target project rules require human escalation.
 
+## Who It Is For
+
+opc-develop is built for builders, especially OPC founders and solo operators, who personally own the product judgment, design taste, and engineering taste behind a project. It assumes the human user can evaluate whether a requirement is structurally sound, whether an interaction feels right, and whether an architecture is likely to age well.
+
+**It is not a good fit for pure implementation roles, or for engineering work where the hard part is heavy team coordination, organizational negotiation, roadmap alignment, or cross-team dependency management.** This suite deliberately increases product and architecture scrutiny before implementation. If you expect the agent to replace product taste, design judgment, or engineering ownership, this workflow will feel too demanding.
+
+## Operating Philosophy
+
+opc-develop is prototype-driven development for AI-assisted builders. The human stays responsible for context, taste, product structure, and architectural direction. The agent does the exhausting execution work once the direction is sharp enough.
+
+The intended operating loop:
+
+0. **Initialize the Harness first.** Use `harness-init` and `harness-eval` to make the target project legible to AI: project rules, documentation standards, local runbooks, runtime evidence, logs, database access, traces, API mocks, storage mocks, testing gates, release flow, and acceptance rules.
+1. **Give the agent the raw idea and let it grill you.** Start with `product-brainstorm`; keep answering hard questions until the feature becomes a clear `requirement.md` with domain language, goals, non-goals, tradeoffs, constraints, and acceptance signals.
+2. **Design a real UI demo inside the existing project.** Use `create-demo` or `build-demo` to build a high-fidelity frontend prototype against frontend-only mocks. Then keep vibe-coding and reviewing the interaction until it matches your product taste.
+3. **Design and review the PRD and technical plan.** Use `build-prd`, `build-technical`, or `loop-design`, then review the artifacts seriously. This is where product structure and engineering architecture are protected from drifting in the wrong direction. **If you cannot judge product structure or architecture depth, stop here; opc-develop is not the right workflow for you yet.**
+4. **Hand implementation, testing, and release to AI with confidence.** Once the design is approved, use `loop-develop`, `local-e2e-verify`, and `release-verify` to let the agent handle implementation, unit/API tests, black-box tests, local E2E, release checks, and rollback readiness. Codex Computer Use is strongly recommended for black-box browser verification. The human should focus on final acceptance and product-quality judgment.
+
 ## Contents
 
 - `.codex-plugin/plugin.json` - Codex plugin manifest.
