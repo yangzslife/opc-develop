@@ -51,7 +51,7 @@ Do not start by editing production code. Do not create a feature branch or workt
 
 ## Output Contract
 
-Return Chinese-first output with:
+Return language-adaptive output with:
 
 - failure reproduction command/path and result
 - root cause

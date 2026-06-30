@@ -42,4 +42,4 @@ Rules:
 - Do not approve when mock cleanup is claimed without diff, grep/residual scan, test, or runtime evidence. Existing project test mocks or Harness fixtures may remain only when outside production runtime and explicitly documented.
 - Treat any claim that black-box regression passed during `tdd-coding` as unsupported unless it is explicitly part of a later `local-e2e-verify` or `release-verify` artifact.
 - List blocking issues before advisory notes.
-- Write findings and rationale primarily in Simplified Chinese. Preserve exact status tokens and technical identifiers.
+- Write findings and rationale in the language selected by `language-contract.md`. Preserve exact status tokens and technical identifiers.

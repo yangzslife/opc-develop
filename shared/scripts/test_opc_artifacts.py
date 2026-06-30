@@ -494,7 +494,7 @@ def test_lite_develop_is_single_current_branch_flow() -> None:
     manifest = json.loads((PLUGIN_ROOT / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
     manifest_text = json.dumps(manifest, ensure_ascii=False)
     assert "lite-commit" not in manifest_text
-    assert "当前分支" in manifest_text
+    assert "current branch" in manifest_text.lower()
 
 
 def main() -> int:

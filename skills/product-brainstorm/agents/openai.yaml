@@ -1,6 +1,6 @@
 interface:
   display_name: "product-brainstorm"
-  short_description: "深度追问并沉淀产品需求"
-  default_prompt: "使用 $product-brainstorm 对原始需求进行深度追问，沉淀领域语言、方案取舍、目标/非目标和验收信号，自动分配下一个 {x}-{feature} 编号目录，并保持中文输出。"
+  short_description: "Deeply question and capture product requirements"
+  default_prompt: "Use $product-brainstorm to challenge the raw requirement, capture domain language, tradeoffs, goals, non-goals, and acceptance signals, then assign the next {x}-{feature} directory."
 policy:
   allow_implicit_invocation: true

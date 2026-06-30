@@ -20,7 +20,7 @@ or:
 **Human Acceptance:** Blocked
 ```
 
-Keep the exact English status token for parser compatibility. Write report body, explanations, and decisions primarily in Simplified Chinese unless the user explicitly requests another language.
+Keep the exact English status token for parser compatibility. Write report body, explanations, and decisions in the language selected by `language-contract.md`.
 
 ## Required Content
 

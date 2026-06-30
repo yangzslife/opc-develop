@@ -1,7 +1,7 @@
 {
   "name": "opc-develop",
-  "version": "0.1.1",
-  "description": "Chinese-first product development workflow suite with Lite, Full, Harness, review, and release verification skills",
+  "version": "0.1.2",
+  "description": "Language-adaptive product development workflow suite with Lite, Full, Harness, review, and release verification skills",
   "author": {
     "name": "wallkop",
     "email": "wallkop2026@zohomail.com"

@@ -166,7 +166,7 @@ Never delete a worktree with unmerged useful work unless the user explicitly cho
 
 ## Output Contract
 
-Return Chinese-first output with:
+Return language-adaptive output with:
 
 - selected mode: `direct`, `isolated-worktree`, or `full`
 - current branch and, when applicable, lite branch/worktree path

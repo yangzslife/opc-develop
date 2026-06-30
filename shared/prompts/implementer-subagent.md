@@ -9,7 +9,7 @@ Provide the subagent:
 - Relevant spec sections.
 - Relevant black-box testcase paths or excerpts as acceptance context.
 - Applicable AGENTS.md branch and acceptance rules.
-- The Chinese-first output contract when available.
+- The language adaptation contract when available.
 - Work directory or worktree path.
 
 Instructions for the subagent:
@@ -26,4 +26,4 @@ Instructions for the subagent:
 10. Self-review before reporting, but do not treat self-review as gate approval.
 11. Report Status: DONE, DONE_WITH_CONCERNS, NEEDS_CONTEXT, or BLOCKED.
 
-Report files changed, tests run, evidence paths, concerns, and blockers primarily in Simplified Chinese. Preserve exact status tokens and technical identifiers.
+Report files changed, tests run, evidence paths, concerns, and blockers in the language selected by `language-contract.md`. Preserve exact status tokens and technical identifiers.

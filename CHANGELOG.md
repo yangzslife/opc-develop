@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 - 2026-06-30
+
+- Changes README default language to English and adds `README.zh-CN.md`.
+- Replaces fixed-language behavior with language-adaptive output based on user request and project rules.
+- Updates Codex and Claude plugin descriptions, prompts, and metadata to avoid fixed-language assumptions.
+- Converts Codex skill entry descriptions and default prompts to English for public distribution.
+
 ## 0.1.1 - 2026-06-30
 
 - Adds Claude Code plugin metadata and OPC reviewer/implementer agent definitions while keeping the root `skills/` library shared.

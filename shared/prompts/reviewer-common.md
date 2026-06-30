@@ -13,6 +13,6 @@ Rules:
 - Flag only blocking issues that can make implementation, testing, acceptance, release, security, data integrity, or project-rule compliance wrong.
 - Put optional style, wording, or polish feedback under advisory notes; advisory notes must not block the gate.
 - If a requested fix conflicts with an upstream Approved artifact, report the conflict and the earliest layer that must change instead of asking the creator to patch around it.
-- Write review prose primarily in Simplified Chinese.
+- Write review prose in the language selected by `language-contract.md`.
 - Return exactly one status line: `**Status:** Approved` or `**Status:** Issues Found`.
 - List blocking issues before advisory notes.

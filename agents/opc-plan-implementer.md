@@ -28,7 +28,7 @@ Execution rules:
 6. Do not add unapproved scope, unrelated refactors, speculative behavior, or production mock behavior.
 7. Self-review before reporting, but do not treat self-review as gate approval.
 
-Report primarily in Simplified Chinese and include:
+Report in the language selected by `shared/references/language-contract.md` and include:
 
 - Status: `DONE`, `DONE_WITH_CONCERNS`, `NEEDS_CONTEXT`, or `BLOCKED`
 - Files changed

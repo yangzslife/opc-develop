@@ -1,17 +1,19 @@
 # opc-develop
 
-opc-develop is a Chinese-first Codex plugin suite for controlled AI-assisted product development. It packages a Lite flow for small changes, a Full flow for product/design/technical/development loops, and Harness initialization/evaluation skills.
+[简体中文](README.zh-CN.md)
+
+opc-develop is a Codex / Claude Code skill suite for controlled AI-assisted product development. It combines a Lite flow for small iterations, a Full flow for end-to-end product development, and Harness initialization/evaluation capabilities.
 
 ![OPC-Develop skills workflow](assets/opc-develop-skills.png)
 
-The suite is intentionally opinionated:
+## Highlights
 
-- Chinese-first user-visible output.
-- Real frontend prototype demos before PRD and technical design.
-- Explicit demo parity, frontend mock inventory, and prototype mock retirement.
-- Review gates before downstream artifacts and implementation.
-- Harness-first documentation, testcases, runtime evidence, release verification, and local E2E discipline.
-- SaaS infrastructure decisions are made in technical design, with MySQL as the default SaaS database baseline unless the target project requires escalation.
+- Adapts output language to the user's input instead of enforcing a fixed default language.
+- Builds real frontend prototype demos before PRD and technical design.
+- Maintains explicit demo parity, frontend mock inventory, and prototype mock retirement.
+- Uses independent review gates before downstream artifacts and implementation.
+- Treats Harness as a first-class concern: documentation, testcases, runtime evidence, local E2E, and release verification are part of the workflow.
+- Requires SaaS/infrastructure decisions in technical design; MySQL is the default SaaS database baseline unless target project rules require human escalation.
 
 ## Contents
 
@@ -56,7 +58,7 @@ claude --plugin-dir ~/plugins/opc-develop
 
 Claude Code skills are invoked with the plugin namespace, for example `/opc-develop:product-brainstorm` or `/opc-develop:harness-eval`.
 
-See [docs/claude-code.md](docs/claude-code.md) for validation and marketplace-source notes.
+See [docs/claude-code.md](docs/claude-code.md) for details.
 
 ## Update
 
@@ -67,11 +69,11 @@ cd ~/plugins/opc-develop
 git pull --ff-only
 ```
 
-After updating, restart Codex or reload plugins if your Codex build requires it.
+After updating, restart Codex or Claude Code, or reload plugins if your client requires it.
 
 ## Publishing And Discovery
 
-GitHub is the canonical source for history, tags, diffs, issues, and release notes. Skill directories such as SkillHub are better used as discovery surfaces that link back to this repository.
+GitHub is the canonical source for history, tags, diffs, issues, and release notes. SkillHub, Claude marketplace, Codex marketplace, and similar directories are better used as discovery surfaces that link back to this repository.
 
 ## Safety Notes
 

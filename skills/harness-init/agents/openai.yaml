@@ -1,4 +1,4 @@
 interface:
-  display_name: "Harness 初始化"
-  short_description: "引导式盘点并规划项目 Harness 初始化与治理方案"
+  display_name: "Harness Init"
+  short_description: "Plan guided Harness initialization and governance"
   default_prompt: "Use $harness-init to assess a project and produce a guided Harness initialization plan without changing files."

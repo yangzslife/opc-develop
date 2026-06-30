@@ -1,26 +1,28 @@
-# 中文优先输出契约
+# Language Adaptation Contract
 
-所有 opc-develop 技能默认生成简体中文为主的用户可见输出。
+All opc-develop skills must adapt user-visible language to the user's language context instead of enforcing a fixed default language.
 
-## 默认语言
+## Default Language
 
-- 面向用户的对话、澄清问题、阻塞说明、评审报告、需求、PRD、技术设计、规格说明、测试用例、计划、进度、验证报告、发布报告，以及前端 prototype demo 的可见文案，必须以简体中文为主。
-- 不要生成英文为主、末尾补一句中文摘要的产物。若输入材料是英文，也要用中文完成分析、归纳和结论。
-- 用户明确要求其他语言时，按用户要求执行；没有明确要求时，保持中文优先。
+- Use the language of the user's latest explicit request for user-visible dialogue, clarification questions, blockers, review reports, requirements, PRDs, technical designs, specs, testcases, plans, progress records, verification reports, release reports, and frontend prototype demo copy.
+- If the user explicitly asks for a language, use that language.
+- If project rules specify a language for artifacts, follow the project rules.
+- If the user's language context is mixed or unclear, use the dominant language in the current request and keep technical identifiers unchanged.
+- Do not produce bilingual output unless the user asks for it or the artifact itself is explicitly meant to be bilingual.
 
-## 必须保留原文的内容
+## Content That Must Preserve Source Form
 
-- 文件路径、命令、代码、配置键、变量名、API/DB 字段、schema 名称、日志片段、错误原文、第三方状态、品牌名和专有名词，保持原文。
-- 固定协议值不得翻译，包括评审状态行 `**Status:** Approved`、`**Status:** Issues Found`，人工验收状态行 `**Human Acceptance:** Passed`、`**Human Acceptance:** Failed`、`**Human Acceptance:** Blocked`，以及子代理状态 `DONE`、`DONE_WITH_CONCERNS`、`NEEDS_CONTEXT`、`BLOCKED`。
-- 引用上游原始需求时，保留原文措辞；如需解释，在其后追加中文说明。
+- Preserve file paths, commands, code, config keys, variable names, API/DB fields, schema names, log excerpts, raw error text, third-party status values, brand names, and proper nouns.
+- Do not translate fixed protocol values, including review status lines `**Status:** Approved` and `**Status:** Issues Found`, human acceptance status lines `**Human Acceptance:** Passed`, `**Human Acceptance:** Failed`, `**Human Acceptance:** Blocked`, and subagent status tokens `DONE`, `DONE_WITH_CONCERNS`, `NEEDS_CONTEXT`, and `BLOCKED`.
+- When quoting upstream raw requirements, preserve the original wording. Add explanations in the selected output language when needed.
 
-## 模板和标题
+## Templates And Headings
 
-- 共享格式文件里的英文标题和示例是结构提示，不是语言要求。除非目标项目已有明确英文规范，否则产物标题、章节名和正文使用中文。
-- 机器可解析字段、状态 token、文件名和目录名保持原样，周围说明用中文。
-- 代码注释、测试名称和提交说明遵循目标项目既有语言风格；没有既有风格时，用户可见说明用中文，代码标识符用项目约定。
+- English headings and examples in shared format files are structural hints, not a forced output language.
+- Machine-parseable fields, status tokens, file names, and directory names remain as written; surrounding explanations follow the selected output language.
+- Code comments, test names, and commit messages should follow the target project's existing language style.
 
-## 阻塞和澄清
+## Blockers And Clarifications
 
-- 需要阻塞、提问或说明风险时，用中文直接说明缺失输入、违反的门禁、无法推断的决策和下一步需要的人类决定。
-- 可以嵌入原始命令输出或日志摘录，但结论和判断必须用中文。
+- When blocking, asking questions, or explaining risks, use the selected output language to state missing inputs, violated gates, decisions that cannot be inferred, and the next human decision needed.
+- Raw command output and logs may remain in their original language, but conclusions and judgments must follow the selected output language.

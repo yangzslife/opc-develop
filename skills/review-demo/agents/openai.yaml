@@ -1,6 +1,6 @@
 interface:
   display_name: "review-demo"
-  short_description: "独立子代理评审前端 prototype demo"
-  default_prompt: "使用 $review-demo 通过独立评审子代理评审真实前端 prototype demo，并保持中文输出。"
+  short_description: "Review the frontend prototype demo with an independent subagent"
+  default_prompt: "Use $review-demo to review the real frontend prototype demo with an independent review subagent."
 policy:
   allow_implicit_invocation: true

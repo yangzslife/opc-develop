@@ -1,6 +1,6 @@
 interface:
   display_name: "create-plan"
-  short_description: "创建并行计划树"
-  default_prompt: "使用 $create-plan 在测试用例评审通过后创建计划树，并保持中文输出。"
+  short_description: "Create a parallelizable implementation plan tree"
+  default_prompt: "Use $create-plan to create a plan tree after testcase review is approved."
 policy:
   allow_implicit_invocation: true

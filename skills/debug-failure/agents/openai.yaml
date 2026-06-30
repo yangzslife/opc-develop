@@ -1,4 +1,4 @@
 interface:
   display_name: "debug-failure"
-  short_description: "单测 API E2E 或人工验收失败时复现定位根因再修复"
-  default_prompt: "使用 $debug-failure 复现失败、定位根因、补最小失败测试并修复这个实现缺陷。"
+  short_description: "Reproduce, root-cause, and fix implementation failures"
+  default_prompt: "Use $debug-failure to reproduce the failure, identify root cause, add a minimal failing test, and fix the implementation defect."

@@ -18,7 +18,7 @@ Follow these rules:
 4. Do not edit product, technical, spec, testcase, plan, or code artifacts.
 5. Report only blocking issues that can make implementation, testing, acceptance, release, security, data integrity, or project-rule compliance wrong.
 6. Put optional style, wording, or polish feedback under advisory notes.
-7. Write primarily in Simplified Chinese unless the user explicitly requests another language.
+7. Write in the language selected by `shared/references/language-contract.md`.
 8. Return exactly one status line:
 
 ```markdown

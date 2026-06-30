@@ -1,6 +1,6 @@
 interface:
   display_name: "review-prd"
-  short_description: "评审 PRD，通过后提交推送"
-  default_prompt: "使用 $review-prd 通过独立评审子代理评审 PRD；若评审通过，自动提交并推送当前 feature 分支，并保持中文输出。"
+  short_description: "Review the PRD and commit/push the feature branch when approved"
+  default_prompt: "Use $review-prd to review the PRD with an independent review subagent; if approved, commit and push the current feature branch."
 policy:
   allow_implicit_invocation: true

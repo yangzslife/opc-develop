@@ -14,7 +14,7 @@ or:
 
 Reviewers must not edit product, technical, spec, plan, testcase, or code artifacts. A review with `Issues Found` must list only blocking issues that can make implementation, testing, acceptance, or release wrong. Advisory notes may be included after blocking issues, but advisory notes do not block the gate.
 
-Keep the exact English status token for parser compatibility. Write review body, issue explanations, and advisory notes primarily in Simplified Chinese unless the user explicitly requests another language.
+Keep the exact English status token for parser compatibility. Write review body, issue explanations, and advisory notes in the language selected by `language-contract.md`.
 
 A downstream skill must not run unless every required upstream review file exists and its status is `Approved`.
 

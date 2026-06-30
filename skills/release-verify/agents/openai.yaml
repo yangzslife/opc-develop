@@ -1,4 +1,4 @@
 interface:
   display_name: "release-verify"
-  short_description: "发布验证 Release Verify 与发布后黑盒验收"
-  default_prompt: "使用 $release-verify 在本地验证完成后执行发布验证和发布后黑盒验收；人工验收记录仅作为可选风险上下文。"
+  short_description: "Run release verification and post-release black-box checks"
+  default_prompt: "Use $release-verify to run release verification and post-release black-box acceptance after local verification; human acceptance records are optional risk context only."

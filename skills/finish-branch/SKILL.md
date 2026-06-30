@@ -54,7 +54,7 @@ Do not merge, push, delete, discard, or remove a worktree without checking branc
 
 ## Output Contract
 
-Return Chinese-first output with:
+Return language-adaptive output with:
 
 - detected repository/worktree state
 - selected finish mode

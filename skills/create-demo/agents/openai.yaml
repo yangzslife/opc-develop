@@ -1,6 +1,6 @@
 interface:
   display_name: "create-demo"
-  short_description: "创建真实前端 prototype demo"
-  default_prompt: "使用 $create-demo 基于已确认需求直接在真实前端代码中创建高保真 prototype demo，并保持中文输出。"
+  short_description: "Create a real frontend prototype demo"
+  default_prompt: "Use $create-demo to build a high-fidelity prototype demo directly in the real frontend codebase from approved requirements."
 policy:
   allow_implicit_invocation: true
