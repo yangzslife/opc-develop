@@ -17,13 +17,14 @@ Read before acting:
 - `../../shared/references/demo-implementation-alignment.md`
 - `../../shared/references/prototype-mock-retirement-contract.md`
 - `../../shared/references/artifact-boundary-contract.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 - `../../shared/references/technical-format.md`
 - `../../shared/references/review-status-contract.md`
 - `../../shared/references/runtime-evidence-contract.md`
 
 ## Inputs
 
-Approved `prd.md`, `requirement.md`, approved frontend prototype evidence, prototype mock inventory, project code, and `docs/technical/`.
+Approved `prd.md`, `requirement.md` with initial risk profile, approved frontend prototype evidence, prototype mock inventory, project code, project runbooks/testing standards when needed for probe discovery, and `docs/technical/`.
 
 ## Hard Gates
 
@@ -39,17 +40,19 @@ Approved `prd.md`, `requirement.md`, approved frontend prototype evidence, proto
 6. Define public API input/output contracts in `technical.md`: endpoint, method, request schema, response schema, status code, error code, auth/permission boundary, and external dependency failure semantics.
 7. For UI-facing work, map the approved frontend prototype and PRD demo alignment contract to real frontend modules, routes, components, state owners, and design-system constraints.
 8. Define the real backend/API/storage contracts needed to replace frontend prototype mocks. Technical owns public API input/output and SaaS/storage choices; do not leave mock replacement decisions to downstream AI.
-9. Document architecture-level approach, module boundaries, public API contracts, SaaS/data/UI impacts, mock replacement architecture, compatibility, migration, security, performance, operations, Runtime evidence, gate classification, and risks.
-10. Keep internal module placement, local components such as sqlite/local storage/cache, state machines, internal error mappings, mock retirement execution details, and TDD seed lists for `spec.md`.
-11. Mark high-impact unknowns as blockers.
+9. Refine the initial risk profile from `requirement.md` using `risk-and-readiness-contract.md`. For every present category, document runtime assumptions, verification method or probe, current evidence label, downstream blocker, and capability readiness expectation in `technical.md`.
+10. When any risk category is present, create or update `docs/features/<feature-slug>/risk-spike.md` with the minimum executable probe plan, evidence paths or `not run`, authenticity labels, and unresolved blockers. Do not invent project-specific command names; use project runbooks when they exist and record missing project harness capabilities when they do not.
+11. Document architecture-level approach, module boundaries, public API contracts, SaaS/data/UI impacts, mock replacement architecture, compatibility, migration, security, performance, operations, Runtime evidence, gate classification, and risks.
+12. Keep internal module placement, local components such as sqlite/local storage/cache, state machines, internal error mappings, mock retirement execution details, and TDD seed lists for `spec.md`.
+13. Mark high-impact unknowns, missing probe ability, or unverified high-risk runtime assumptions as blockers.
 
 ## Output Contract
 
-Write `docs/features/<feature-slug>/technical.md`.
+Write `docs/features/<feature-slug>/technical.md`. When the feature risk profile has any present category, also write or update `docs/features/<feature-slug>/risk-spike.md`.
 
 ## Self-Check
 
-Confirm technical design commits to one route, owns SaaS choices and public API I/O, explains module boundaries, maps approved frontend prototype to real implementation, defines real backend/API/storage replacement for prototype mocks, and states where Log, DB, and Trace evidence will come from without becoming a duplicate executable spec. If this run revised an already reviewed technical design, report that `review-technical` must be rerun before downstream development can proceed.
+Confirm technical design commits to one route, owns SaaS choices and public API I/O, explains module boundaries, maps approved frontend prototype to real implementation, defines real backend/API/storage replacement for prototype mocks, includes risk profile and runtime assumption readiness when needed, and states where Log, DB, and Trace evidence will come from without becoming a duplicate executable spec. If any risk category is present, confirm `risk-spike.md` exists, uses project-agnostic capability wording, and labels evidence realism. If this run revised an already reviewed technical design, report that `review-technical` must be rerun before downstream development can proceed.
 ## Blockers
 
 Stop and report a blocker when required inputs are missing, an upstream review is not Approved, the project `AGENTS.md` forbids the planned action, or continuing would require guessing a product or technical decision.

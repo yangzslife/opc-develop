@@ -25,6 +25,19 @@ For `lite-develop` and other current-branch workflows, isolated worktrees are sh
 
 If the parent checkout has unrelated dirty changes, do not merge a lite worktree back until the dirty state is understood and the user confirms the target state. Do not stash, commit, discard, or copy parent dirty changes automatically.
 
+## Capability Readiness
+
+A worktree is not ready just because `git worktree add` succeeded. Before claiming an isolated environment is ready for implementation, demo, verification, or acceptance, record the project-specific capability readiness checks required by `risk-and-readiness-contract.md`:
+
+- intended checkout/worktree and branch;
+- services started from that checkout;
+- dependency state, local DB/cache/session/tenant/org/project state, and fixtures;
+- API mock and storage/state mock status when relevant;
+- external providers mocked, skipped with explicit pending label, or verified with safe real credentials;
+- report, log, DB, trace, screenshot, or recording paths.
+
+If the project has no readiness command, say so and record the missing harness capability instead of claiming the worktree is ready.
+
 ## Cleanup
 
 After a worktree branch is merged into its required parent branch, remove the worktree with documented or standard `git worktree remove <path>`. Do not remove a worktree with uncommitted work unless the user explicitly chose discard.

@@ -10,6 +10,7 @@ It must include:
 - Goals and non-goals.
 - Key user paths.
 - Constraints and assumptions.
+- Initial feature risk profile from `risk-and-readiness-contract.md`.
 - Open questions and human decisions.
 - Brainstorm summary with alternatives and tradeoffs.
 - Grilling summary showing the major decision branches explored, resolved answers, recommendation, and any remaining non-blocking questions.
@@ -34,6 +35,18 @@ Then run the grilling gate from `grilling-domain-contract.md`:
 
 For non-trivial product decisions, include 2-3 viable approaches, concise tradeoffs, and one recommended approach. Do not present a single path when scope, UX, or product semantics are genuinely ambiguous.
 
+## Risk Profile Capture
+
+Before finishing `requirement.md`, classify whether the feature has delivery-relevant risk in any category from `risk-and-readiness-contract.md`:
+
+- External Provider.
+- Runtime Capability.
+- Long-running / Streaming.
+- State Coupling.
+- Cross-shell UI.
+
+Record the initial risk profile, known assumptions, expected verification surface, and whether `risk-spike.md` is required. This is an early classification, not the final technical decision. If the classification is unclear, record the ambiguity as an open question for `create-technical`.
+
 ## Domain And Decision Capture
 
 During brainstorming, capture domain language and durable decisions using the opc-adapted rules in `grilling-domain-contract.md`:
@@ -51,6 +64,7 @@ Before finishing, confirm:
 - The grilling gate reached shared understanding, or unresolved blocking questions are explicitly reported instead of being buried in the requirement.
 - Goals and non-goals are explicit.
 - Key user paths and acceptance signals are clear enough for PRD creation.
+- Initial risk profile is present, or `Risk Profile: none identified` is recorded.
 - Hidden product decisions are either resolved or listed as blocking questions.
 - Core terminology is stable, or terminology questions are listed as blockers when they affect scope, behavior, or acceptance.
 - Alternatives, tradeoffs, recommendation, glossary follow-ups, and ADR follow-ups are present when applicable.

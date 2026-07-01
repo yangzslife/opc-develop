@@ -15,6 +15,7 @@ Read before acting:
 - `../../shared/references/language-contract.md`
 - `../../shared/references/harness-doc.md`
 - `../../shared/references/demo-implementation-alignment.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 - `../../shared/references/human-acceptance-contract.md`
 - `../../shared/references/review-status-contract.md`
 
@@ -31,7 +32,8 @@ Do not edit demo, PRD, technical design, spec, testcase, plan, or code artifacts
 1. Read the human feedback and evidence exactly as provided.
 2. Inspect current branch according to `branch-stage-contract.md`; do not switch branches.
 3. Read upstream artifacts only enough to determine whether the feedback conflicts with requirement, approved demo, PRD, technical design, spec, testcase coverage, plan, or implementation.
-4. Classify the earliest affected layer:
+4. Determine whether the feedback qualifies for Batch Acceptance under `human-acceptance-contract.md`: multiple low-risk UI/copy/interaction/implementation items, already covered by approved artifacts, with no product contract, public API/data, state-machine, security, permission, or architecture change.
+5. Classify the earliest affected layer:
    - `product-brainstorm` when product intent, scope, user path, or core decision changed.
    - `create-demo` when the accepted product experience needs a revised frontend prototype before PRD changes.
    - `create-prd` when product behavior, rules, permissions, states, fields, or acceptance criteria are wrong or incomplete.
@@ -41,9 +43,10 @@ Do not edit demo, PRD, technical design, spec, testcase, plan, or code artifacts
    - `create-plan` when the plan decomposition, branch strategy, dependencies, or TDD commands are wrong.
    - `debug-failure` when approved demo, PRD, technical design, spec, testcases, and plan already cover the feedback and the failure is a pure implementation defect with reproducible evidence.
    - `tdd-coding` when the approved plan remains correct but additional planned implementation work or subagent execution is required.
-5. Write or update `human-acceptance.md` with status, evidence, classification, earliest affected artifact, rework entrypoint, required review gates, and release impact/risk context.
-6. Update `progress.md` with the acceptance result, selected rework path, blockers, and residual risk.
-7. Stop after routing unless the user explicitly asks to continue into the selected next skill.
+6. If Batch Acceptance applies, record the batch scope, combined rework entrypoint, evidence expected after the batch, and any item that escalates out of the batch. Do not restart the Full artifact loop for every low-risk item.
+7. Write or update `human-acceptance.md` with status, evidence, evidence authenticity labels when relevant, classification, earliest affected artifact, rework entrypoint, required review gates, and release impact/risk context.
+8. Update `progress.md` with the acceptance result, selected rework path, batch scope when applicable, blockers, and residual risk.
+9. Stop after routing unless the user explicitly asks to continue into the selected next skill.
 
 ## Output Contract
 
@@ -51,7 +54,7 @@ Write `docs/features/<feature-slug>/human-acceptance.md` following the human acc
 
 ## Self-Check
 
-Confirm the selected next skill is the earliest layer that can fix the acceptance failure. Confirm human acceptance is recorded as optional release context and is not a `release-verify` hard gate unless the project release runbook explicitly requires it.
+Confirm the selected next skill is the earliest layer that can fix the acceptance failure. Confirm Batch Acceptance is used only for low-risk approved-artifact feedback. Confirm human acceptance is recorded as optional release context and is not a `release-verify` hard gate unless the project release runbook explicitly requires it.
 
 ## Blockers
 

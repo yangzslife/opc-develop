@@ -10,9 +10,11 @@ opc-develop is a Codex / Claude Code skill suite for controlled AI-assisted prod
 
 - Adapts output language to the user's input instead of enforcing a fixed default language.
 - Builds real frontend prototype demos before PRD and technical design.
+- Classifies high-risk features early and requires risk spikes, thin-slice gates, and capability readiness before broad implementation.
 - Maintains explicit demo parity, frontend mock inventory, and prototype mock retirement.
 - Uses independent review gates before downstream artifacts and implementation.
-- Treats Harness as a first-class concern: documentation, testcases, runtime evidence, local E2E, and release verification are part of the workflow.
+- Treats Harness as a first-class concern: documentation, testcases, runtime evidence, mock/storage readiness, local E2E, and release verification are part of the workflow.
+- Labels verification realism so mock or seeded evidence is not reported as real-provider, human-accepted, or long-run validation.
 - Requires SaaS/infrastructure decisions in technical design; data storage choices must follow the target project's existing or explicitly approved architecture baseline, and unresolved high-impact choices block for human review.
 
 ## Who It Is For
@@ -27,10 +29,10 @@ opc-develop is prototype-driven development for AI-assisted builders. The human 
 
 The intended operating loop:
 
-0. **Initialize the Harness first.** Use `harness-init` and `harness-eval` to make the target project legible to AI: project rules, documentation standards, local runbooks, runtime evidence, logs, database access, traces, API mocks, storage mocks, testing gates, release flow, and acceptance rules.
+0. **Initialize the Harness first.** Use `harness-init` and `harness-eval` to make the target project legible to AI: project rules, documentation standards, local runbooks, runtime evidence, logs, database access, traces, API mocks, storage mocks, risk readiness, thin-slice gates, testing gates, release flow, and acceptance rules.
 1. **Give the agent the raw idea and let it grill you.** Start with `product-brainstorm`; keep answering hard questions until the feature becomes a clear `requirement.md` with domain language, goals, non-goals, tradeoffs, constraints, and acceptance signals.
 2. **Design a real UI demo inside the existing project.** Use `create-demo` or `build-demo` to build a high-fidelity frontend prototype against frontend-only mocks. Then keep vibe-coding and reviewing the interaction until it matches your product taste.
-3. **Design and review the PRD and technical plan.** Use `build-prd`, `build-technical`, or `loop-design`, then review the artifacts seriously. This is where product structure and engineering architecture are protected from drifting in the wrong direction. **If you cannot judge product structure or architecture depth, stop here; opc-develop is not the right workflow for you yet.**
+3. **Design and review the PRD and technical plan.** Use `build-prd`, `build-technical`, or `loop-design`, then review the artifacts seriously. This is where product structure, runtime assumptions, and engineering architecture are protected from drifting in the wrong direction. **If you cannot judge product structure or architecture depth, stop here; opc-develop is not the right workflow for you yet.**
 4. **Hand implementation, testing, and release to AI with confidence.** Once the design is approved, use `loop-develop`, `local-e2e-verify`, and `release-verify` to let the agent handle implementation, unit/API tests, black-box tests, local E2E, release checks, and rollback readiness. Codex Computer Use is strongly recommended for black-box browser verification. The human should focus on final acceptance and product-quality judgment.
 
 ## Contents

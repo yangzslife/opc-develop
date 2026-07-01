@@ -17,8 +17,23 @@ It is for human architecture review. It must explain and commit to the macro tec
 - Security and permission boundaries.
 - Performance and operational impact.
 - Runtime evidence plan: Log, DB, Trace.
+- Feature risk profile, runtime assumptions, risk spike status, and capability readiness requirements from `risk-and-readiness-contract.md`.
 - Merge gate, release gate, and external blocker classification when relevant.
 - Risks and blocking decisions.
+
+## Risk And Readiness
+
+For every delivery-relevant risk category, `technical.md` must include:
+
+- risk category: External Provider, Runtime Capability, Long-running / Streaming, State Coupling, or Cross-shell UI;
+- user path affected;
+- runtime assumption;
+- verification method or probe;
+- current evidence path or `not run`;
+- evidence authenticity label such as `mock passed`, `seeded passed`, `local real service passed`, `external provider passed`, `pending`, or `blocked`;
+- downstream gate that is blocked if the assumption remains unverified.
+
+If any risk category is present, `docs/features/<feature-slug>/risk-spike.md` must exist or be created by the technical design phase. Do not approve broad implementation on unlisted runtime assumptions.
 
 ## Boundary With Spec
 
@@ -30,6 +45,7 @@ It is for human architecture review. It must explain and commit to the macro tec
 - module boundaries and ownership at architecture level
 - migration, compatibility, rollback, and operational strategy
 - Runtime evidence strategy
+- risk profile, risk spike requirements, capability readiness requirements, and evidence authenticity expectations
 - risks and high-impact unknowns
 
 `technical.md` must not become a line-by-line implementation contract. Internal module placement, local component details, state machines, internal error mappings, acceptance mapping, and TDD seed lists belong in `spec.md`.

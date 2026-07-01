@@ -16,6 +16,7 @@ Read before acting:
 - `../../shared/references/branch-stage-contract.md`
 - `../../shared/references/language-contract.md`
 - `../../shared/references/harness-doc.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 - `../../shared/references/runtime-evidence-contract.md`
 - `../../shared/references/worktree-isolation-contract.md`
 
@@ -43,6 +44,8 @@ Lite is a current-branch workflow. The default expected branch is `develop`. If 
 Do not stash, commit, discard, copy, or merge dirty changes without explicit user instruction or project-rule authority. Do not push or release.
 
 Stop and recommend Full opc-develop flow when the request needs product brainstorm, high-fidelity demo alignment, full PRD, architecture design, data migration, security, permissions, payment, privacy, cross-service work, cross-team work, multiple formal workstreams, formal spec/plan/review, or when project rules forbid simplification.
+
+Apply `risk-and-readiness-contract.md` before choosing Lite. Escalate to Full when the change introduces or materially changes External Provider, Runtime Capability, Long-running / Streaming, State Coupling, or Cross-shell UI risk. Batch Acceptance is allowed only for multiple low-risk acceptance feedback items already covered by approved artifacts.
 
 ## Classification
 
@@ -97,26 +100,31 @@ If current uncommitted changes are required context, do not create a worktree un
 
 Escalate to Full when Lite classification is false or project rules require formal artifacts/gates.
 
+### Batch Acceptance mode
+
+Use when a user gives multiple low-risk human acceptance feedback items that are already covered by approved artifacts and can be fixed plus verified as one batch. Escalate any item that changes product behavior, API/data contracts, state-machine semantics, architecture, security, permissions, or risk classification.
+
 ## Process
 
 1. Resolve the project root with `git rev-parse --show-toplevel`.
 2. Inspect `git branch --show-current`, `git status --short`, `git rev-parse --abbrev-ref HEAD`, and `git worktree list --porcelain`.
 3. Read the required shared and project references.
 4. Apply `branch-stage-contract.md`: default to direct current-branch edits on `develop`; require confirmation before writing on any non-`develop` branch.
-5. Classify the request as `direct`, `isolated-worktree`, or `full`.
-6. For direct mode, implement on the current branch. Keep the change narrow and avoid unrelated cleanup.
-7. For isolated mode:
+5. Classify the request as `direct`, `isolated-worktree`, `batch-acceptance`, or `full`.
+6. Record why the selected mode is Full, Lite direct, Lite isolated, or Batch Acceptance using `risk-and-readiness-contract.md`.
+7. For direct mode, implement on the current branch. Keep the change narrow and avoid unrelated cleanup.
+8. For isolated mode:
    - create or locate the existing `lite/<slug>` worktree from the current branch `HEAD`
    - record parent branch and parent commit
    - implement only inside the lite worktree
    - keep changes independent from unrelated dirty state in the parent checkout
-8. Run targeted checks based on the actual diff and project rules:
+9. Run targeted checks based on the actual diff and project rules:
    - UI path changes: run documented local start/status commands, capture screenshots or Computer Use evidence when required.
    - API endpoint changes: add or update required API tests, scenario mapping, and strict audit inputs required by the project.
    - Backend logic changes: run focused unit or integration tests plus any required aggregate checks.
    - Copy/style-only changes: run the lightest documented build, type, or smoke check that can catch regressions.
-9. If a documented service start command was run, follow the project runbook for stopping or preserving services.
-10. Present changed behavior, files changed summary, commands run, evidence paths, residual risks, and exact items needing user quick acceptance.
+10. If a documented service start command was run, follow the project runbook for stopping or preserving services.
+11. Present changed behavior, files changed summary, commands run, evidence paths, evidence authenticity labels when relevant, residual risks, and exact items needing user quick acceptance.
 
 ## Iteration Rules
 
@@ -169,7 +177,7 @@ Never delete a worktree with unmerged useful work unless the user explicitly cho
 
 Return language-adaptive output with:
 
-- selected mode: `direct`, `isolated-worktree`, or `full`
+- selected mode: `direct`, `isolated-worktree`, `batch-acceptance`, or `full`
 - current branch and, when applicable, lite branch/worktree path
 - implemented behavior
 - files changed summary
@@ -179,4 +187,4 @@ Return language-adaptive output with:
 
 ## Self-Check
 
-Confirm the selected Lite mode matches risk, project military rules were read, `branch-stage-contract.md` was followed, no `feature/*` branch or Full artifacts were created, targeted checks match the diff, no branch/worktree action happened without authority, no dirty unrelated work was hidden, and the user has enough evidence to accept, iterate, merge, discard, or escalate.
+Confirm the selected Lite or Batch Acceptance mode matches risk, project military rules were read, `branch-stage-contract.md` was followed, no `feature/*` branch or Full artifacts were created, targeted checks match the diff, no branch/worktree action happened without authority, no dirty unrelated work was hidden, evidence labels do not overclaim realism, and the user has enough evidence to accept, iterate, merge, discard, or escalate.

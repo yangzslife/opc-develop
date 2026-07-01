@@ -15,6 +15,7 @@ Read before acting:
 - `../../shared/references/language-contract.md`
 - `../../shared/references/harness-doc.md`
 - `../../shared/references/demo-implementation-alignment.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 - `../../shared/references/review-trigger-policy.md`
 - `../../shared/references/review-status-contract.md`
 - `../../shared/prompts/reviewer-common.md`
@@ -22,7 +23,7 @@ Read before acting:
 
 ## Inputs
 
-Approved demo when UI-facing, approved `prd.md`, approved `spec.md`, feature `testcases.md`, real black-box testcase files under `docs/testcases/`.
+Approved demo when UI-facing, approved `prd.md`, `risk-spike.md` when high-risk categories are present, approved `spec.md`, feature `testcases.md`, real black-box testcase files under `docs/testcases/`.
 
 ## Hard Gates
 
@@ -32,7 +33,7 @@ This skill must run in a fresh dedicated review subagent. The main controller mu
 
 1. The main controller starts a fresh review subagent for this review only.
 2. Provide only the required inputs, `reviewer-common.md`, and `testcase-reviewer.md`; do not include creator chat history, suspected issues, desired outcome, or unrelated context.
-3. The review subagent checks acceptance criteria mapping, approved demo-critical layout/interactions/states for UI-facing work, black-box E2E/acceptance/regression coverage, executable steps, expected results, automation entrypoints, and failure diagnostics.
+3. The review subagent checks acceptance criteria mapping, approved demo-critical layout/interactions/states for UI-facing work, black-box E2E/acceptance/regression coverage, thin-slice testcase coverage when the feature risk profile requires it, executable steps, expected results, automation entrypoints, evidence authenticity expectations, and failure diagnostics.
 4. The review subagent confirms index paths point to real files.
 5. The review subagent rejects unit-test, API-test, white-box fixture, mock, or TDD command content in testcase artifacts.
 6. For re-review after `Issues Found`, default to targeted fresh review against previous blocking issues and changed testcase/index files unless the revision changes testcase semantics broadly.
@@ -44,7 +45,7 @@ Write `docs/features/<feature-slug>/reviews/testcase-review.md`.
 
 ## Self-Check
 
-Confirm the report was authored by a fresh review subagent and issues identify missing criteria, missing paths, non-executable steps, or black-box/white-box boundary violations.
+Confirm the report was authored by a fresh review subagent and issues identify missing criteria, missing paths, missing high-risk thin-slice coverage, non-executable steps, missing evidence labels, or black-box/white-box boundary violations.
 ## Blockers
 
 Stop and report a blocker when required inputs are missing, an upstream review is not Approved, the project `AGENTS.md` forbids the planned action, or continuing would require guessing a product or technical decision.

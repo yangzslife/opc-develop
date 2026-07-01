@@ -15,13 +15,14 @@ Read before acting:
 - `../../shared/references/language-contract.md`
 - `../../shared/references/harness-doc.md`
 - `../../shared/references/demo-implementation-alignment.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 - `../../shared/references/local-e2e-contract.md`
 - `../../shared/references/runtime-evidence-contract.md`
 - `../../shared/references/evidence-before-claim.md`
 
 ## Inputs
 
-Completed code after `tdd-coding`, approved demo when UI-facing, `prd.md`, `spec.md`, `docs/technical/runbooks/local-dev.md`, `docs/technical/standards/testing.md`, relevant black-box `docs/testcases/`, and Runtime evidence entries.
+Completed code after `tdd-coding`, approved demo when UI-facing, `prd.md`, `spec.md`, `risk-spike.md` when high-risk categories are present, `docs/technical/runbooks/local-dev.md`, `docs/technical/standards/testing.md`, relevant black-box `docs/testcases/`, and Runtime evidence entries.
 
 ## Hard Gates
 
@@ -32,21 +33,22 @@ Do not guess local start, stop, status, log, test, or evidence commands. Do not 
 1. Inspect current branch according to `branch-stage-contract.md`; do not switch branches.
 2. Read local-dev runbook and testing standard.
 3. Start local services exactly as documented.
-4. Run status and health checks.
-5. Execute relevant black-box E2E, smoke, acceptance, or regression commands.
+4. Run status and health checks, then record environment capability readiness from `risk-and-readiness-contract.md`: intended checkout/worktree, services, dependency state, fixture/mock state, provider handling, and report paths.
+5. Execute relevant black-box E2E, smoke, acceptance, or regression commands, including thin-slice cases for high-risk features.
 6. For UI-facing work, capture runtime screenshots, interaction recordings, Browser/Computer Use notes, or equivalent evidence and compare visible layout/interactions/states against the approved demo and testcase expectations.
 7. Capture reports, screenshots, logs, DB evidence, and trace evidence.
-8. If a check fails because of a pure implementation defect, route through `debug-failure`; if the failure reveals wrong upstream artifacts, route to the earliest affected skill using `demo-implementation-alignment.md`.
-9. Stop or leave services according to project runbook.
-10. Update `progress.md` only with evidence-backed status.
+8. Label every major result with the highest evidence authenticity actually proven: `mock passed`, `seeded passed`, `local real service passed`, `external provider passed`, `human accepted`, `long-run passed`, `not run`, `pending`, or `blocked`.
+9. If a check fails because of a pure implementation defect, route through `debug-failure`; if the failure reveals wrong upstream artifacts, route to the earliest affected skill using `demo-implementation-alignment.md`.
+10. Stop or leave services according to project runbook.
+11. Update `progress.md` only with evidence-backed status and do not upgrade seeded/mock results into external-provider, human-accepted, or long-run claims.
 
 ## Output Contract
 
-Write reports under `docs/testcases/<product-module>/reports/` and update `progress.md` with evidence paths, demo parity result for UI-facing work, and residual risk.
+Write reports under `docs/testcases/<product-module>/reports/` and update `progress.md` with evidence paths, capability readiness result, evidence authenticity labels, demo parity result for UI-facing work, and residual risk.
 
 ## Self-Check
 
-Confirm commands are fresh, exit codes are known, evidence paths exist, and runtime demo parity was checked for UI-facing work before claiming local verification passed.
+Confirm commands are fresh, exit codes are known, evidence paths exist, capability readiness was recorded, evidence authenticity labels are accurate, and runtime demo parity was checked for UI-facing work before claiming local verification passed.
 ## Blockers
 
 Stop and report a blocker when required inputs are missing, an upstream review is not Approved, the project `AGENTS.md` forbids the planned action, or continuing would require guessing a product or technical decision.

@@ -35,11 +35,26 @@ Each testcase must include:
 - Expected result.
 - Automation entrypoint or manual verification path.
 - Failure diagnostics: screenshot/log/DB/trace hints.
+- Evidence authenticity expectation when the case can run at different realism levels, such as mock, seeded, local real service, external provider, human, or long-run.
 
 Each testcase must be executable from the user or system boundary. It may reference API calls only when the API is the product boundary under test; it must not become an internal handler/unit-test recipe.
 
 `tdd-coding` must read these black-box testcases as acceptance context for designing unit tests and API tests, but must not execute black-box regression as its own completion gate.
 
 For UI-facing features, black-box E2E and acceptance cases must cover demo-critical layout, state, and interaction paths. They should verify visible behavior from the user boundary, not internal component structure.
+
+## Thin Slice Testcases
+
+When `risk-and-readiness-contract.md` marks a feature as high risk, create at least one thin vertical slice testcase before `create-plan` proceeds.
+
+The thin slice testcase must cover:
+
+- normal product entrypoint when one exists;
+- real route, state, API, storage, or shell boundary involved in the feature;
+- provider, hardware, or external dependency handled through a project-approved mock/fixture or explicitly marked as real-environment pending;
+- start action through visible or persisted user value;
+- diagnostics that identify which boundary failed.
+
+Do not turn the thin slice into a unit, API implementation, or white-box test recipe. It remains a black-box product testcase with explicit automation or manual execution path.
 
 Do not store secrets, passwords, tokens, production private data, or customer data in fixtures.

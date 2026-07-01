@@ -20,8 +20,9 @@ Read before acting:
 - `../../shared/references/harness-doc.md`
 - `../../shared/references/branch-stage-contract.md`
 - `../../shared/references/mock-system-contract.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 
-Use `harness-doc.md` as the baseline for documentation architecture, feature artifact layout, global testcase organization, technical docs, reviews, progress records, and changelog expectations. Use `branch-stage-contract.md` as the baseline for branch lifecycle: early brainstorming can remain on the current branch, `product-brainstorm` creates or enters the feature branch before writing `requirement.md`, and `create-demo` plus later Full feature skills must run on that feature branch. Use `mock-system-contract.md` as the baseline for API mock, storage mock, fixture isolation, scenario switching, reset, and mock evidence. Project `AGENTS.md` and project-specific runbooks remain binding when stricter.
+Use `harness-doc.md` as the baseline for documentation architecture, feature artifact layout, global testcase organization, technical docs, reviews, progress records, and changelog expectations. Use `branch-stage-contract.md` as the baseline for branch lifecycle: early brainstorming can remain on the current branch, `product-brainstorm` creates or enters the feature branch before writing `requirement.md`, and `create-demo` plus later Full feature skills must run on that feature branch. Use `mock-system-contract.md` as the baseline for API mock, storage mock, fixture isolation, scenario switching, reset, and mock evidence. Use `risk-and-readiness-contract.md` as the baseline for feature risk profiles, risk spikes, thin-slice gates, capability readiness, flow tier selection, and evidence authenticity labels. Project `AGENTS.md` and project-specific runbooks remain binding when stricter.
 
 ## Workflow
 
@@ -90,13 +91,13 @@ Use these dimensions unless the repository clearly needs a narrower or broader m
    - Looks for endpoint or interface inventory, scenario mapping, drift detection, strict coverage rules, generated reports, and a clear distinction between real tests and N/A.
 
 7. **Black-Box Testcases And UI Automation**
-   - Looks for long-term testcase docs, product-module organization, Playwright/Web automation, desktop/Electron/manual harness evidence, login handling, screenshots/traces, and reports.
+   - Looks for long-term testcase docs, product-module organization, high-risk thin-slice testcase coverage, Playwright/Web automation, desktop/Electron/manual harness evidence, login handling, screenshots/traces, and reports.
 
 8. **Mock System And Fixture Isolation**
    - Looks for both API mock and storage mock, explicit mock mode/profile, scenario switching, fixture reset/cleanup, non-sensitive fixture policy, demo/prototype worktree support, local E2E/regression/human acceptance reuse, report generation, drift checks, and clear separation from real backend, real storage, credentials, and production data.
 
 9. **Local E2E Aggregation And Machine Reports**
-   - Looks for a single local E2E entrypoint, precondition checks, report JSON, raw report paths, failure classification, and optional service/tool/provider E2E modes.
+   - Looks for a single local E2E entrypoint, precondition checks, capability readiness checks, report JSON, raw report paths, failure classification, evidence authenticity labels, and optional service/tool/provider E2E modes.
 
 10. **Runtime Evidence, Logs, DB, And Trace**
    - Looks for runtime evidence package generation, manifest schema, log collection, DB allowlist diagnostics, agent/tool/provider trace, payload retention, redaction, and reproduction commands.
@@ -186,6 +187,8 @@ Use this structure:
 - Historical feature docs lack `testcases.md`, PRD links, progress reports, or acceptance evidence.
 - Local E2E does not own service lifecycle, or its lifecycle responsibility is ambiguous.
 - Runtime evidence exists but is not indexed from failing E2E reports.
+- High-risk features lack `risk-spike.md`, thin-slice testcase coverage, capability readiness evidence, or evidence authenticity labels.
+- Local E2E proves only mock or seeded paths but reports them as real provider, human-accepted, or long-run verification.
 - Trace payloads are collected without a retention or redaction policy.
 - Release and rollback docs exist but have no dry-run report.
 - CI or local gates do not run the same commands required by project rules.

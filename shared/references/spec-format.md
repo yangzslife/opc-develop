@@ -15,6 +15,7 @@ It must cover:
 - Security and permissions.
 - Rollout, rollback, and migration verification points.
 - Observability and Runtime evidence points mapped to Log, DB, and Trace when relevant.
+- High-risk readiness implementation contracts derived from approved `technical.md` and `risk-spike.md`, without changing architecture decisions or evidence labels.
 - Verification points mapped to PRD acceptance criteria and testcase coverage.
 - TDD seed list: focused unit/API/implementation-facing test targets that `tdd-coding` can execute without inventing test strategy.
 
@@ -50,5 +51,7 @@ Do not redefine public API input/output, SaaS components, or architecture choice
 The spec must contain no TODO/TBD placeholders. Missing decisions must be listed as blocking questions.
 
 For UI-facing features, a spec that omits the approved frontend prototype's layout, interaction requirements, or required mock retirement details is not implementation-ready, even if the API/data contracts are complete.
+
+For high-risk features, a spec that omits implementable contracts for approved runtime assumptions, capability readiness, reset/cleanup, failure diagnostics, or thin-slice support is not implementation-ready.
 
 See `artifact-boundary-contract.md` for the full technical/spec/plan boundary.

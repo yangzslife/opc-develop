@@ -17,6 +17,7 @@ Read before acting:
 - `../../shared/references/demo-implementation-alignment.md`
 - `../../shared/references/prototype-mock-retirement-contract.md`
 - `../../shared/references/artifact-boundary-contract.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 - `../../shared/references/development-input-contract.md`
 - `../../shared/references/plan-tree-format.md`
 - `../../shared/references/tdd-contract.md`
@@ -24,7 +25,7 @@ Read before acting:
 
 ## Inputs
 
-Approved frontend prototype evidence and mock inventory when UI-facing, approved `prd.md`, approved `technical.md`, approved `spec.md`, approved black-box testcase index, project code context, applicable project `AGENTS.md`, `docs/technical/runbooks/local-dev.md`, and `docs/technical/standards/testing.md`.
+Approved frontend prototype evidence and mock inventory when UI-facing, approved `prd.md`, approved `technical.md`, `risk-spike.md` when high-risk categories are present, approved `spec.md`, approved black-box testcase index including thin-slice coverage when required, project code context, applicable project `AGENTS.md`, `docs/technical/runbooks/local-dev.md`, and `docs/technical/standards/testing.md`.
 
 ## Hard Gates
 
@@ -35,15 +36,17 @@ Approved frontend prototype evidence and mock inventory when UI-facing, approved
 1. Read root and scoped `AGENTS.md` files and extract development flow, branch strategy, branch creation, acceptance flow, and gates.
 2. Inspect current branch according to `branch-stage-contract.md`; the plan records branch expectations but must not create branches.
 3. Read approved frontend prototype evidence, mock inventory, PRD, spec, technical design, black-box testcases, local-dev runbook, and testing standard.
-4. Build a File Map for each plan file with exact expected files or directories and their purpose.
-5. For UI-facing plans, include prototype/PRD/spec references that implementer subagents must read; do not restate UI technical detail in the plan.
-6. Split independent workstreams into separate `plan-XX-<workstream>.md` files.
-7. Keep serially dependent tasks inside the same plan file with explicit task dependencies.
-8. For each task, define referenced upstream artifacts, allowed change boundary, forbidden change boundary, development order notes, dependencies, and ready standard. When the spec has a `Prototype Mock Retirement Plan`, include explicit task boundaries for replacing and removing prototype mocks.
-9. Do not write API schemas, error matrices, database design, component selection, algorithms, RED/GREEN commands, or concrete test cases in the plan.
-10. Remove placeholders such as TODO, similar to, add proper error handling, handle edge cases, write tests later, or implement appropriately.
-11. Use black-box testcases as acceptance context only, and hand off black-box E2E, acceptance, or regression execution to `local-e2e-verify` or `release-verify`.
-12. Write `integration-plan.md` as the final merge and implementation-facing integration node, with explicit handoff to `local-e2e-verify` for black-box regression and runtime demo parity evidence.
+4. For high-risk features, confirm `risk-spike.md` exists, thin-slice testcase coverage exists, capability readiness evidence exists, and no readiness blocker remains. Stop instead of planning broad implementation when runtime/provider/state/shell assumptions are not backed by evidence or when the risk spike names a missing probe, mock, fixture, or environment capability as a blocker.
+5. Build a File Map for each plan file with exact expected files or directories and their purpose.
+6. For UI-facing plans, include prototype/PRD/spec references that implementer subagents must read; do not restate UI technical detail in the plan.
+7. Split independent workstreams into separate `plan-XX-<workstream>.md` files.
+8. Keep serially dependent tasks inside the same plan file with explicit task dependencies.
+9. For each task, define referenced upstream artifacts, allowed change boundary, forbidden change boundary, development order notes, dependencies, and ready standard. When the spec has a `Prototype Mock Retirement Plan`, include explicit task boundaries for replacing and removing prototype mocks.
+10. For tasks affected by high-risk categories, reference the risk spike, thin-slice testcase, capability readiness evidence, and expected evidence authenticity labels without restating project-specific command details.
+11. Do not write API schemas, error matrices, database design, component selection, algorithms, RED/GREEN commands, or concrete test cases in the plan.
+12. Remove placeholders such as TODO, similar to, add proper error handling, handle edge cases, write tests later, or implement appropriately.
+13. Use black-box testcases as acceptance context only, and hand off black-box E2E, acceptance, or regression execution to `local-e2e-verify` or `release-verify`.
+14. Write `integration-plan.md` as the final merge and implementation-facing integration node, with explicit handoff to `local-e2e-verify` for black-box regression, runtime demo parity evidence, capability readiness reporting, and evidence authenticity labels.
 
 ## Output Contract
 
@@ -51,7 +54,7 @@ Write `docs/features/<feature-slug>/plan/plan-XX-<workstream>.md` files and `doc
 
 ## Self-Check
 
-Confirm every plan declares AGENTS.md rule source, current feature branch expectation from `branch-stage-contract.md`, acceptance entrypoint, acceptance pass criteria, File Map, artifact references, allowed/forbidden change boundaries, parallel-safe conditions, and ready standards. Confirm the plan is indirect and contains no technical detail that belongs in technical/spec. Confirm an implementer subagent can execute by reading referenced approved artifacts without extra design decisions and without running black-box regression. If this run revised an already reviewed plan, report that `review-plan` must be rerun before TDD coding can proceed.
+Confirm every plan declares AGENTS.md rule source, current feature branch expectation from `branch-stage-contract.md`, acceptance entrypoint, acceptance pass criteria, File Map, artifact references, allowed/forbidden change boundaries, parallel-safe conditions, and ready standards. For high-risk features, confirm risk spike, thin-slice testcase, capability readiness, and authenticity-label handoff are referenced before broad implementation begins, and no readiness blocker is being bypassed. Confirm the plan is indirect and contains no technical detail that belongs in technical/spec. Confirm an implementer subagent can execute by reading referenced approved artifacts without extra design decisions and without running black-box regression. If this run revised an already reviewed plan, report that `review-plan` must be rerun before TDD coding can proceed.
 ## Blockers
 
 Stop and report a blocker when required inputs are missing, an upstream review is not Approved, the project `AGENTS.md` forbids the planned action, or continuing would require guessing a product or technical decision.

@@ -21,6 +21,7 @@ Each plan file must declare:
 - Applicable `AGENTS.md` path and rules summary.
 - Branch expectation from project `AGENTS.md` and `branch-stage-contract.md`. Plans may reference the feature branch created by `product-brainstorm` before writing `requirement.md`, but must not introduce a new branch creation step.
 - Acceptance entrypoint and acceptance pass criteria from project `AGENTS.md` or project docs.
+- Risk profile, thin-slice testcase path when required, and environment capability readiness expectation.
 - File Map: exact files or directories expected to change, with purpose and ownership notes. References may point to artifact sections or line ranges.
 - Demo parity references for UI-facing work: approved demo path and referenced demo/PRD/spec sections; do not restate UI technical detail.
 - Goal.
@@ -29,6 +30,8 @@ Each plan file must declare:
 - Parallel-safe conditions.
 - Ready standard.
 - Risk and rollback notes.
+
+For high-risk features, each affected plan must reference the approved risk spike, thin-slice testcase, and capability readiness evidence. If a readiness blocker remains, stop before writing broad implementation plans. Do not hide missing runtime/provider/environment readiness inside a broad implementation task.
 
 ## Task Format
 
@@ -53,5 +56,7 @@ For frontend tasks, plans must point to the approved demo and spec sections that
 ## Integration Plan
 
 `integration-plan.md` must wait for every plan/task ready state. It must define integration or conflict handling, integration order, focused white/gray-box integration checks when needed, handoff to `local-e2e-verify`, failure rollback, and completion evidence. Do not make `tdd-coding` run black-box regression; local E2E and release black-box checks are later gates.
+
+For high-risk features, the integration plan must also state the handoff evidence authenticity labels expected from local verification, such as `mock passed`, `seeded passed`, `local real service passed`, `external provider passed`, `human accepted`, `long-run passed`, `pending`, or `blocked`.
 
 See `artifact-boundary-contract.md` for the full technical/spec/plan boundary.

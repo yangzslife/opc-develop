@@ -15,6 +15,7 @@ Read before acting:
 - `../../shared/references/language-contract.md`
 - `../../shared/references/harness-doc.md`
 - `../../shared/references/demo-implementation-alignment.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 - `../../shared/references/release-contract.md`
 - `../../shared/references/runtime-evidence-contract.md`
 - `../../shared/references/evidence-before-claim.md`
@@ -31,20 +32,20 @@ Do not guess release, CI/CD, rollback, or release gate commands. Do not create f
 
 1. Inspect current branch according to `branch-stage-contract.md` and the project release runbook; do not switch branches unless the release runbook explicitly requires it.
 2. Read deploy, rollback, and testing documents.
-3. Confirm all required review gates and local verification gates are passed, including runtime demo parity evidence for UI-facing work.
+3. Confirm all required review gates and local verification gates are passed, including runtime demo parity evidence for UI-facing work and evidence authenticity labels for high-risk paths. Do not treat `mock passed` or `seeded passed` as `external provider passed`, `human accepted`, or `long-run passed`.
 4. If `human-acceptance.md` exists, read it as optional risk context. If it is Failed or Blocked, report the risk and recommended `acceptance-rework` route, but do not treat it as a hard release blocker unless project runbooks require it.
 5. Run release gate and build exactly as documented.
 6. Execute CI/CD or release command exactly as documented.
 7. Run documented post-release black-box smoke, automated acceptance, or regression checks.
-8. Record release and rollback evidence with command, exit code, report path, commit, and artifact identifiers.
+8. Record release and rollback evidence with command, exit code, report path, commit, artifact identifiers, and evidence authenticity labels when relevant.
 
 ## Output Contract
 
-Update `progress.md` and reports with verification summary, optional human acceptance risk context when present, version, commit, artifact path, checksum, CI/CD link, upload or release result, post-release acceptance result, and rollback entrypoint.
+Update `progress.md` and reports with verification summary, optional human acceptance risk context when present, version, commit, artifact path, checksum, CI/CD link, upload or release result, post-release acceptance result, evidence authenticity labels, and rollback entrypoint.
 
 ## Self-Check
 
-Confirm every release claim has fresh evidence from command output, CI/CD status, report files, and required release runbook gates. Confirm human acceptance was not treated as a hard gate unless the project release runbook explicitly requires it.
+Confirm every release claim has fresh evidence from command output, CI/CD status, report files, and required release runbook gates. Confirm evidence labels do not overclaim realism. Confirm human acceptance was not treated as a hard gate unless the project release runbook explicitly requires it.
 ## Blockers
 
 Stop and report a blocker when required inputs are missing, an upstream review is not Approved, the project `AGENTS.md` forbids the planned action, or continuing would require guessing a product or technical decision.

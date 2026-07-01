@@ -1,6 +1,6 @@
 {
   "name": "opc-develop",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "opc-develop is a Codex and Claude Code skill suite for controlled Lite, Full, Harness, review, and release verification workflows.",
   "author": {
     "name": "wallkop"
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "opc_develop",
     "shortDescription": "Lite, Full, Harness, review, and release workflows",
-    "longDescription": "opc-develop (OPC = One Person Company) provides an opinionated but language-adaptive development workflow suite for Codex and Claude Code. It includes Lite development for small current-branch changes, Full product development from brainstorm to demo, PRD, technical design, spec, testcases, plan, TDD coding, local verification, acceptance rework, and release verification, plus Harness initialization and evaluation. The suite emphasizes real frontend prototype demos, demo parity, frontend mock inventory, prototype mock retirement, independent review gates, runtime evidence, local E2E, and safe branch finishing. User-visible outputs adapt to the user input language while preserving technical identifiers and machine-readable status tokens.",
+    "longDescription": "opc-develop (OPC = One Person Company) provides an opinionated but language-adaptive development workflow suite for Codex and Claude Code. It includes Lite development for small current-branch changes, Full product development from brainstorm to demo, PRD, technical design, spec, testcases, plan, TDD coding, local verification, acceptance rework, and release verification, plus Harness initialization and evaluation. The suite emphasizes real frontend prototype demos, feature risk profiles, risk spikes, thin-slice gates, capability readiness, demo parity, frontend mock inventory, prototype mock retirement, independent review gates, runtime evidence, local E2E, evidence authenticity labels, and safe branch finishing. User-visible outputs adapt to the user input language while preserving technical identifiers and machine-readable status tokens.",
     "developerName": "wallkop",
     "category": "Coding",
     "capabilities": [
@@ -20,7 +20,7 @@
     "defaultPrompt": [
       "Use $lite-develop to handle this small request on the current branch: classify direct edit vs temporary worktree, develop quickly under project rules, and verify with targeted evidence.",
       "Use $loop-develop to execute the approved Full development loop for this feature.",
-      "Use $harness-init to plan Harness initialization for this project, including API mock and storage mock."
+      "Use $harness-init to plan Harness initialization for this project, including risk readiness, API mock, and storage mock."
     ]
   }
 }

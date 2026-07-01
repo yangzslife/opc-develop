@@ -47,6 +47,17 @@ Evidence should include:
 - report path such as `.dev/reports/mock-system/` or a project-specific Harness report path
 - redaction status for diagnostics and fixtures
 
+## High-Risk Feature Enforcement
+
+When `risk-and-readiness-contract.md` marks a feature as high risk, downstream skills must check mock readiness before treating automated evidence as complete:
+
+- External Provider or unavailable backend behavior requires API mock coverage or an explicit real-environment pending label.
+- State Coupling requires storage/state mock coverage for the state needed by the product path, or an explicit readiness blocker.
+- Runtime Capability and Cross-shell UI paths may use project-approved shell/hardware fixtures or must stay marked `pending` until real-environment evidence exists.
+- Long-running / Streaming paths require success and failure scenarios that can reset deterministically.
+
+If API mock or storage/state mock is missing, do not claim full local E2E or acceptance readiness from a seeded/demo-only path. Use the evidence authenticity labels from `risk-and-readiness-contract.md` to state the highest level actually proven.
+
 ## Documentation Targets
 
 Recommended stable project docs:

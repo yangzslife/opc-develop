@@ -15,12 +15,13 @@ Read before acting:
 - `../../shared/references/language-contract.md`
 - `../../shared/references/harness-doc.md`
 - `../../shared/references/demo-implementation-alignment.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 - `../../shared/references/testcase-format.md`
 - `../../shared/references/review-status-contract.md`
 
 ## Inputs
 
-Approved demo when UI-facing, approved `prd.md`, approved `technical.md`, approved `spec.md`, existing `docs/testcases/` modules.
+Approved demo when UI-facing, approved `prd.md`, approved `technical.md`, `risk-spike.md` when high-risk categories are present, approved `spec.md`, existing `docs/testcases/` modules.
 
 ## Hard Gates
 
@@ -32,10 +33,12 @@ Approved demo when UI-facing, approved `prd.md`, approved `technical.md`, approv
 2. Identify product module for each acceptance criterion.
 3. For UI-facing work, include demo-critical layout, state, and interaction paths as black-box E2E or acceptance cases.
 4. Create or update black-box testcase files under `docs/testcases/<product-module>/`.
-5. Include E2E, acceptance, and regression coverage as needed from the product/system boundary.
-6. Write feature-local `testcases.md` as an index to real black-box testcase paths.
-7. Include black-box automation entrypoints or manual verification paths plus failure diagnostics, including screenshot or interaction evidence expectations when demo parity matters.
-8. Leave unit/API test design to `tdd-coding`; mention only acceptance behaviors that those tests may need to cover.
+5. If `risk-and-readiness-contract.md` marks any high-risk category as present, create at least one black-box thin vertical slice testcase that uses the normal product entrypoint when possible, real route/state/API/storage/shell boundaries, project-approved mock/fixture or explicit real-environment pending label, and start-to-visible-or-persisted-value expectations.
+6. Include E2E, acceptance, and regression coverage as needed from the product/system boundary.
+7. Write feature-local `testcases.md` as an index to real black-box testcase paths.
+8. Include black-box automation entrypoints or manual verification paths plus failure diagnostics, including screenshot or interaction evidence expectations when demo parity matters.
+9. Include evidence authenticity expectations when a testcase can pass at mock, seeded, local real service, external provider, human, or long-run levels.
+10. Leave unit/API test design to `tdd-coding`; mention only acceptance behaviors that those tests may need to cover.
 
 ## Output Contract
 
@@ -43,7 +46,7 @@ Write only black-box testcase files under `docs/testcases/<product-module>/` and
 
 ## Self-Check
 
-Confirm every PRD acceptance criterion maps to at least one real black-box testcase path, demo-critical UI behavior is covered when relevant, and no UT/API/TDD implementation test design was written. If this run revised already reviewed testcases, report that `review-testcases` must be rerun before plan creation can proceed.
+Confirm every PRD acceptance criterion maps to at least one real black-box testcase path, demo-critical UI behavior is covered when relevant, high-risk features have a thin-slice testcase with evidence authenticity expectations, and no UT/API/TDD implementation test design was written. If this run revised already reviewed testcases, report that `review-testcases` must be rerun before plan creation can proceed.
 ## Blockers
 
 Stop and report a blocker when required inputs are missing, an upstream review is not Approved, the project `AGENTS.md` forbids the planned action, or continuing would require guessing a product or technical decision.

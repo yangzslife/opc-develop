@@ -26,8 +26,9 @@ Read before producing the plan:
 - `../../shared/references/harness-doc.md`
 - `../../shared/references/branch-stage-contract.md`
 - `../../shared/references/mock-system-contract.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 
-`planning-framework.md` contains the question flow, maturity model, required Harness dimensions, and output template. `harness-doc.md` defines the required documentation layout and artifact boundaries for feature docs, global testcases, global technical docs, reviews, progress, and changelog records. `branch-stage-contract.md` defines the default branch lifecycle baseline: early brainstorming can remain on the current branch, `product-brainstorm` creates or enters the feature branch before writing `requirement.md`, and `create-demo` plus later Full feature skills must run on that feature branch. `mock-system-contract.md` defines the API mock, storage mock, fixture isolation, and mock evidence baseline that every Harness initialization plan must address.
+`planning-framework.md` contains the question flow, maturity model, required Harness dimensions, and output template. `harness-doc.md` defines the required documentation layout and artifact boundaries for feature docs, global testcases, global technical docs, reviews, progress, and changelog records. `branch-stage-contract.md` defines the default branch lifecycle baseline: early brainstorming can remain on the current branch, `product-brainstorm` creates or enters the feature branch before writing `requirement.md`, and `create-demo` plus later Full feature skills must run on that feature branch. `mock-system-contract.md` defines the API mock, storage mock, fixture isolation, and mock evidence baseline that every Harness initialization plan must address. `risk-and-readiness-contract.md` defines feature risk profiles, risk spikes, thin-slice gates, capability readiness, flow tiers, and evidence authenticity labels.
 
 ## Workflow
 
@@ -39,6 +40,7 @@ Read before producing the plan:
    - test scripts and CI/release scripts
    - local run scripts
    - API mock, storage mock, fixture, scenario, and reset entry points
+   - high-risk readiness probes, thin-slice smoke paths, and evidence realism labels when present
    - runtime evidence entry points such as logs, database, traces, and reports
 3. Classify current Harness maturity across:
    - development process
@@ -46,6 +48,7 @@ Read before producing the plan:
    - local service lifecycle
    - automated verification
    - mock system and fixture isolation
+   - feature risk and environment capability readiness
    - runtime evidence
    - release and rollback verification
 4. Ask guided questions in small batches. Prefer 3-7 questions per batch. Ask only for decisions not safely inferable from files.
@@ -68,6 +71,7 @@ Return a Markdown planning document with these sections:
 - `## Development Flow Plan`
 - `## Local Runtime Plan`
 - `## Mock System Plan`
+- `## Risk And Capability Readiness Plan`
 - `## Automated Verification Plan`
 - `## Runtime Evidence Plan`
 - `## Release Verification Plan`

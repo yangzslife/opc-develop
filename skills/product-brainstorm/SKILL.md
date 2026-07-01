@@ -15,6 +15,7 @@ Read before acting:
 - `../../shared/references/language-contract.md`
 - `../../shared/references/harness-doc.md`
 - `../../shared/references/requirement-format.md`
+- `../../shared/references/risk-and-readiness-contract.md`
 - `../../shared/references/grilling-domain-contract.md`
 
 ## Required Scripts
@@ -40,13 +41,14 @@ Do not create demo, PRD, technical design, spec, plan, testcase, code, or worktr
 5. Run the opc-adapted grilling gate from `grilling-domain-contract.md`: walk the product decision tree branch by branch, inspect code/docs before asking when possible, ask one question at a time, include a recommended answer for every human question, and keep resolving dependencies until shared understanding is reached or a blocker is clear.
 6. During grilling, apply the domain modeling rules from `grilling-domain-contract.md`: challenge conflicting terminology, propose canonical terms, keep pending glossary/ADR notes before the feature branch exists, and only promote stable project-wide terms or ADRs after branch rules allow artifact writes.
 7. Explore 2-3 viable product approaches when there is meaningful choice; record tradeoffs and one recommendation. Do not hide unresolved scope, UX, or product semantics inside a single recommended path.
-8. Stop without creating a branch when the requirement is still too unclear, may be cancelled, lacks enough direction to commit a feature artifact, or has a blocking question that could change scope, core behavior, or acceptance.
-9. When ready to commit the requirement, derive the base feature name, then run the bundled script `../../shared/scripts/next_feature_slug.py` resolved relative to this skill directory: `python3 ../../shared/scripts/next_feature_slug.py "<feature-name>" --features-dir <project-root>/docs/features`. Use its output as the next numbered feature slug in `<number>-<feature-name>` format with no zero padding.
-10. Before writing `requirement.md`, create or enter `feature/<feature-slug>` according to `branch-stage-contract.md`. If the current branch is not `develop` and not the matching feature branch, ask the user to confirm the base branch. If dirty state is unrelated or unclear, stop.
-11. Write or append `docs/features/<feature-slug>/requirement.md` on the feature branch, including the grilling summary, confirmed domain language, alternatives, tradeoffs, recommendation, non-blocking open questions, and any glossary or ADR follow-ups.
-12. Write stable project-wide glossary or ADR artifacts only when the criteria in `grilling-domain-contract.md` are met and the project `AGENTS.md` permits the target paths; otherwise keep them as requirement follow-ups.
-13. Initialize `progress.md` if it does not exist and record the feature branch.
-14. Run the requirement self-review from `requirement-format.md`, including the grilling readiness criteria.
+8. Classify the initial feature risk profile using `risk-and-readiness-contract.md`: External Provider, Runtime Capability, Long-running / Streaming, State Coupling, Cross-shell UI, or `none identified`. Record unknown classifications as open questions for `create-technical`.
+9. Stop without creating a branch when the requirement is still too unclear, may be cancelled, lacks enough direction to commit a feature artifact, or has a blocking question that could change scope, core behavior, acceptance, or risk classification.
+10. When ready to commit the requirement, derive the base feature name, then run the bundled script `../../shared/scripts/next_feature_slug.py` resolved relative to this skill directory: `python3 ../../shared/scripts/next_feature_slug.py "<feature-name>" --features-dir <project-root>/docs/features`. Use its output as the next numbered feature slug in `<number>-<feature-name>` format with no zero padding.
+11. Before writing `requirement.md`, create or enter `feature/<feature-slug>` according to `branch-stage-contract.md`. If the current branch is not `develop` and not the matching feature branch, ask the user to confirm the base branch. If dirty state is unrelated or unclear, stop.
+12. Write or append `docs/features/<feature-slug>/requirement.md` on the feature branch, including the grilling summary, confirmed domain language, alternatives, tradeoffs, recommendation, non-blocking open questions, initial risk profile, risk-spike requirement when any category is present, and any glossary or ADR follow-ups.
+13. Write stable project-wide glossary or ADR artifacts only when the criteria in `grilling-domain-contract.md` are met and the project `AGENTS.md` permits the target paths; otherwise keep them as requirement follow-ups.
+14. Initialize `progress.md` if it does not exist and record the feature branch plus initial risk profile and any required risk spike.
+15. Run the requirement self-review from `requirement-format.md`, including the grilling readiness criteria.
 
 ## Output Contract
 
@@ -54,7 +56,7 @@ Write `docs/features/<feature-slug>/requirement.md` following the requirement fo
 
 ## Self-Check
 
-Verify feature slug is numbered with no leading zero, current branch is `feature/<feature-slug>` or a project-approved equivalent, the grilling gate reached shared understanding or a blocker, goals, non-goals, key paths, constraints, domain language, open questions, alternatives, tradeoffs, recommendation, acceptance signals, glossary/ADR follow-ups, and self-review conclusions are present.
+Verify feature slug is numbered with no leading zero, current branch is `feature/<feature-slug>` or a project-approved equivalent, the grilling gate reached shared understanding or a blocker, goals, non-goals, key paths, constraints, domain language, open questions, alternatives, tradeoffs, recommendation, initial risk profile, risk-spike follow-up when needed, acceptance signals, glossary/ADR follow-ups, and self-review conclusions are present.
 ## Blockers
 
 Stop and report a blocker when required inputs are missing, an upstream review is not Approved, the project `AGENTS.md` forbids the planned action, or continuing would require guessing a product or technical decision.

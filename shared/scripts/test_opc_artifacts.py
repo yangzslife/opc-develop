@@ -218,6 +218,70 @@ def test_frontend_prototype_demo_and_mock_retirement_contracts_are_threaded() ->
     assert "final mock residual review/audit" in tdd
     assert "Do not claim `DONE`" in tdd
 
+
+def test_risk_and_readiness_contract_is_threaded() -> None:
+    contract = (PLUGIN_ROOT / "shared/references/risk-and-readiness-contract.md").read_text(
+        encoding="utf-8"
+    )
+    for needle in [
+        "Feature Risk Profile",
+        "Risk Spike",
+        "Thin Slice Gate",
+        "Environment Capability Readiness",
+        "Evidence Authenticity Labels",
+    ]:
+        assert needle in contract, needle
+
+    required_skills = [
+        "product-brainstorm",
+        "create-technical",
+        "review-technical",
+        "create-spec",
+        "review-spec",
+        "create-testcases",
+        "review-testcases",
+        "create-plan",
+        "review-plan",
+        "tdd-coding",
+        "local-e2e-verify",
+        "release-verify",
+        "acceptance-rework",
+        "lite-develop",
+        "harness-init",
+        "harness-eval",
+    ]
+    for skill in required_skills:
+        text = (PLUGIN_ROOT / f"skills/{skill}/SKILL.md").read_text(encoding="utf-8")
+        assert "risk-and-readiness-contract.md" in text, skill
+
+    cross_refs = {
+        "shared/references/requirement-format.md": "Initial feature risk profile",
+        "shared/references/technical-format.md": "runtime assumptions",
+        "shared/references/spec-format.md": "High-risk readiness",
+        "shared/references/testcase-format.md": "Thin Slice Testcases",
+        "shared/references/plan-tree-format.md": "thin-slice testcase",
+        "shared/references/local-e2e-contract.md": "Evidence authenticity labels",
+        "shared/references/worktree-isolation-contract.md": "Capability Readiness",
+        "shared/references/mock-system-contract.md": "High-Risk Feature Enforcement",
+        "shared/references/human-acceptance-contract.md": "Batch Acceptance",
+        "shared/references/evidence-before-claim.md": "lower-realism",
+        "shared/references/runtime-evidence-contract.md": "authenticity label",
+        "shared/references/development-input-contract.md": "risk-spike.md",
+    }
+    for rel, needle in cross_refs.items():
+        text = (PLUGIN_ROOT / rel).read_text(encoding="utf-8")
+        assert needle in text, rel
+
+    prompt_checks = {
+        "shared/prompts/technical-reviewer.md": "risk-spike.md",
+        "shared/prompts/spec-reviewer.md": "high-risk readiness",
+        "shared/prompts/testcase-reviewer.md": "thin vertical slice",
+        "shared/prompts/plan-reviewer.md": "capability readiness",
+    }
+    for rel, needle in prompt_checks.items():
+        text = (PLUGIN_ROOT / rel).read_text(encoding="utf-8").lower()
+        assert needle.lower() in text, rel
+
     validator = (PLUGIN_ROOT / "shared/scripts/validate_opc_artifacts.py").read_text(
         encoding="utf-8"
     )

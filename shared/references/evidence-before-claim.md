@@ -8,6 +8,8 @@ Record the command, exit code, timestamp or report path, working directory, bran
 
 Do not use stale command output from before the latest code or artifact change.
 
+When a path can pass at different realism levels, record the evidence authenticity label from `risk-and-readiness-contract.md`, such as `mock passed`, `seeded passed`, `local real service passed`, `external provider passed`, `human accepted`, `long-run passed`, `not run`, `pending`, or `blocked`.
+
 ## Controller Duties
 
 A subagent report is not sufficient evidence by itself. The controller must inspect actual diff, changed files, test output, report files, or Runtime evidence before making a status claim.
@@ -23,4 +25,5 @@ Do not say Passed, Done, Fixed, Verified, Ready, Releasable, or Published when:
 - report paths do not exist,
 - output belongs to an older revision,
 - the check was skipped without an explicit documented reason,
-- the environment was unavailable.
+- the environment was unavailable,
+- a lower-realism check is being used to claim a higher-realism result.

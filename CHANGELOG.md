@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.5 - 2026-07-01
+
+- Adds a project-agnostic risk and readiness contract covering feature risk profiles, risk spikes, thin-slice gates, environment capability readiness, flow tiers, and evidence authenticity labels.
+- Threads high-risk readiness through brainstorm, technical review, spec, testcases, plan, TDD, local E2E, release verification, Lite, and Batch Acceptance flows.
+- Strengthens Harness initialization/evaluation around thin-slice smoke paths, mock/storage readiness, capability checks, and preventing mock or seeded evidence from being reported as real-provider or long-run validation.
+
 ## 0.1.4 - 2026-06-30
 
 - Adds the native Codex repository marketplace manifest.

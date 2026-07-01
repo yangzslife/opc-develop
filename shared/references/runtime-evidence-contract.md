@@ -16,4 +16,6 @@ Record trace id propagation, trace query entrypoint, trace link or exported trac
 
 Evidence paths must be written to `progress.md` and testcase reports.
 
+Evidence must include the authenticity label required by `risk-and-readiness-contract.md` when a result depends on mocks, seeded fixtures, local real services, external providers, human acceptance, or long-running stability.
+
 Fresh evidence is required before claiming completion, verification, acceptance, release readiness, or publication. Follow `evidence-before-claim.md` when an implementation, verification, or release skill reports status.

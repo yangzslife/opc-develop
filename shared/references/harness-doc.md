@@ -67,6 +67,7 @@ docs/
       demo/
         prototype.md
         assets/
+      risk-spike.md
       technical.md
       spec.md
       plan/
@@ -263,6 +264,25 @@ Feature 专属技术文档。
 - 只写和该 feature 相关的技术说明。
 - 不放全局架构和长期规范。
 - 如果内容长期有效，应抽象后沉淀到 `docs/technical/`。
+
+### risk-spike.md
+
+高风险 feature 的最小可执行风险探针记录。
+
+当 feature 涉及外部 provider、运行时能力、长连接/流式链路、本地状态耦合或多 shell UI 时，必须按 `risk-and-readiness-contract.md` 创建或更新该文件。
+
+用途：
+
+- 记录 feature risk profile。
+- 记录关键运行时假设和最小探针。
+- 记录 mock、seeded、本地真实服务、外部 provider、人工验收和长稳验证的真实性标签。
+- 记录缺失的项目 harness 能力和阻断的下游 gate。
+
+要求：
+
+- 不写成技术设计或测试计划。
+- 不绑定固定项目脚本名；具体项目命令来自 `AGENTS.md`、runbook 或测试标准。
+- 没有探针时必须记录 `blocked` 或 `pending`，不能用空文件冒充通过。
 
 ### spec.md
 

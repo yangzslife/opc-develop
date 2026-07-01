@@ -13,6 +13,8 @@ The Harness model has four pillars:
 
 Mock system is a required cross-cutting capability inside automated verification and local runtime: every target Harness plan must address API mock, storage mock, fixture isolation, scenario switching, and reset evidence.
 
+Risk and readiness is a required cross-cutting capability: every target Harness plan must address feature risk profiles, risk spikes, thin-slice gates, environment capability readiness, flow tiers, and evidence authenticity labels.
+
 ## Planning Only Rule
 
 This skill produces a plan. It must not directly modify the project. The plan may name files that should be created or updated later, but it must clearly mark them as planned deliverables.
@@ -30,6 +32,7 @@ Check:
 - Local lifecycle: install, start, stop, status, logs, health checks, ports, env vars.
 - Testing: unit, integration/API, E2E, smoke, regression, coverage, reports.
 - Mock system: API mock, storage mock, scenario switching, fixture directories, reset/cleanup, smoke/check commands, and isolation from real backend/storage.
+- Risk and readiness: risk classification rules, risk-spike artifact, thin-slice smoke/testcase path, capability readiness command or checklist, and evidence realism labels.
 - Release: build, release gate, deploy, rollback, post-release verification.
 - Runtime evidence: log location, DB connection or local file, trace/correlation IDs, report paths.
 - Secrets policy: env files, credential sources, redaction rules, protected data boundaries.
@@ -105,6 +108,16 @@ Ask:
 4. Where should mock fixtures live, and what prevents secrets, tokens, production data, or protected personal data from entering them?
 5. Must mock support streaming, tool calls, external provider failure, offline state, conflict state, or permission failures?
 6. Which command or documented entrypoint can prove API mock and storage mock are both usable?
+
+### Batch 5c: Risk And Capability Readiness
+
+Ask:
+
+1. Which feature types should be classified as high risk: external providers, runtime/OS capabilities, streaming/long-running work, state coupling, or cross-shell UI?
+2. Where should `risk-spike.md` live and what minimal probe evidence should it require?
+3. What is the project thin-slice smoke path for high-risk work?
+4. Which command or checklist proves local/worktree/container capability readiness?
+5. How should reports label evidence realism: mock, seeded, local real service, external provider, human accepted, long-run, pending, or blocked?
 
 ### Batch 6: Runtime Evidence
 
@@ -256,6 +269,7 @@ Recommended layers:
 - Integration/API: service and API behavior, DB or external boundary behavior.
 - E2E: user-visible workflow validation.
 - Mock smoke/check: proves API mock and storage mock can start, switch scenario, reset state, and produce diagnostics without real backend/storage.
+- Thin-slice smoke: proves a high-risk feature path crosses the normal entrypoint, real project boundaries, and visible or persisted user value with explicit evidence realism labels.
 - Smoke: fast environment health check.
 - Regression: long-lived product-module regression suite.
 - Release gate: required pre-release combination of tests, build, and evidence.
@@ -280,6 +294,17 @@ Require project facts for:
 - Demo/prototype integration: how high-fidelity demo or prototype worktree consumes API mock and storage mock.
 - E2E/regression integration: which tests use mock profiles and which must hit real services.
 - Evidence: smoke/check command, report path, API mock status, storage mock status, reset status, and redaction status.
+
+## Risk And Capability Readiness Model
+
+Require project facts for:
+
+- Risk profile: categories that must trigger `risk-spike.md`.
+- Risk spike: artifact path, required sections, evidence labels, and blocker rules.
+- Thin slice: normal entrypoint, real project boundaries, provider/hardware/mock handling, report path, and failure diagnostics.
+- Capability readiness: service origin, dependency state, DB/cache/session/tenant/org/project state, fixture/mock state, provider handling, and evidence paths.
+- Flow tiers: when to use Full, Lite, or Batch Acceptance.
+- Evidence authenticity: labels used in progress, local E2E, release, and acceptance reports.
 
 ## Runtime Evidence Model
 
@@ -344,10 +369,11 @@ Recommended phases:
 3. Documentation standards and migration plan.
 4. Local service lifecycle runbook.
 5. Mock System Baseline.
-6. Automated verification and coverage gates.
-7. Runtime evidence: Log, DB, Trace.
-8. Release and rollback verification.
-9. Governance backlog and rollout schedule.
+6. Risk and capability readiness baseline.
+7. Automated verification and coverage gates.
+8. Runtime evidence: Log, DB, Trace.
+9. Release and rollback verification.
+10. Governance backlog and rollout schedule.
 
 `Mock System Baseline` deliverables must include API mock plan, storage mock plan, mock fixture standard, mock runbook, mock smoke/check command, mock report path, and demo/local-e2e/regression integration plan.
 
@@ -358,6 +384,15 @@ Recommended phases:
 - Mock does not access real backend, real cloud storage, real credentials, or production data.
 - Mock fixtures contain no sensitive data.
 - A command or documented step proves API mock and storage mock are both usable.
+
+`Risk and capability readiness baseline` deliverables must include risk classification rules, `risk-spike.md` template or section policy, thin-slice smoke/testcase standard, capability readiness command/checklist, and evidence authenticity label policy.
+
+`Risk and capability readiness baseline` acceptance criteria:
+
+- High-risk feature categories are explicit and project-agnostic.
+- A thin-slice path exists or missing capability is recorded as a blocker.
+- Local/worktree/container readiness checks distinguish service health from business/runtime capability.
+- Reports cannot upgrade mock or seeded evidence into real-provider, human-accepted, or long-run claims.
 
 ## Output Quality Bar
 

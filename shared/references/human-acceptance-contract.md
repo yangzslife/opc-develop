@@ -29,6 +29,7 @@ Each report must include:
 - Human feedback source and time.
 - Acceptance scope and environment.
 - Evidence: screenshots, recordings, logs, testcase reports, or user-provided notes.
+- Evidence authenticity labels from `risk-and-readiness-contract.md` when relevant.
 - Result summary.
 - Classification and earliest affected artifact layer.
 - Rework entrypoint skill and reason.
@@ -55,3 +56,18 @@ Route to the earliest affected layer, not the cheapest code change:
 - Pure implementation defect already covered by approved artifacts: `tdd-coding`.
 
 After rework, run every downstream review gate affected by the chosen entrypoint before returning to local verification. Re-run human acceptance only when the user or project runbook requires it.
+
+## Batch Acceptance
+
+Use Batch Acceptance when human feedback contains multiple low-risk items that are covered by approved artifacts and do not change product intent, public API/data contracts, state-machine semantics, security/permission rules, or architecture.
+
+Batch Acceptance must record:
+
+- all feedback items;
+- which items are low-risk implementation/UI/copy fixes;
+- which items, if any, escalate to the earliest affected Full-flow artifact;
+- one combined rework entrypoint;
+- one combined evidence package after the batch fix;
+- residual items that remain `pending` or `blocked`.
+
+Do not use Batch Acceptance to hide changed scope, changed acceptance criteria, missing architecture, or missing test coverage.

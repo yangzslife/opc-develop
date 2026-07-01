@@ -1,6 +1,6 @@
 # Technical Reviewer Prompt
 
-Inputs: requirement.md, demo, prd.md, technical.md, relevant code/docs.
+Inputs: requirement.md, demo, prd.md, technical.md, risk-spike.md when high-risk categories are present, relevant code/docs.
 
 Check:
 
@@ -12,7 +12,9 @@ Check:
 - Public API input/output contracts are present: endpoint, method, request schema, response schema, status code, error code, auth/permission boundary, and external dependency failure semantics.
 - Module boundaries, data impact, compatibility, migration, security, performance, and operations are addressed at architecture level.
 - Runtime evidence plan covers Log, DB, and Trace.
+- Feature risk profile follows `risk-and-readiness-contract.md`; every present risk category has runtime assumptions, verification method or probe, evidence authenticity label, and downstream blocker when unverified.
+- `risk-spike.md` exists or is explicitly blocked when External Provider, Runtime Capability, Long-running / Streaming, State Coupling, or Cross-shell UI risk is present.
 - Technical design stays at architecture/public-contract level, leaving internal module placement, local components, state machines, and TDD seed to `spec.md`.
 - High-impact unknowns are blockers.
 
-Return `Issues Found` if technical leaves component choice open, omits API public I/O, hides SaaS decisions in spec/plan, chooses a new or changed datastore/database without project baseline, existing facts, or an explicit human-approved decision, or duplicates micro implementation details that belong in spec.
+Return `Issues Found` if technical leaves component choice open, omits API public I/O, hides SaaS decisions in spec/plan, chooses a new or changed datastore/database without project baseline, existing facts, or an explicit human-approved decision, approves a high-risk runtime/provider/state/shell assumption without evidence, a concrete probe plan, or an explicit blocker, or duplicates micro implementation details that belong in spec.
