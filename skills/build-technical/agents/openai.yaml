@@ -1,6 +1,0 @@
-interface:
-  display_name: "build-technical"
-  short_description: "Run the create-technical and review-technical improvement loop"
-  default_prompt: "Use $build-technical to create, review, and iterate the technical design until approved or blocked."
-policy:
-  allow_implicit_invocation: true

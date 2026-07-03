@@ -20,7 +20,7 @@ This checklist tracks public distribution channels for opc-develop.
 ## Validation Commands
 
 ```bash
-python3 shared/scripts/test_opc_artifacts.py
+python3 shared/scripts/test_opc_scripts.py
 python3 -m json.tool .codex-plugin/plugin.json >/dev/null
 python3 -m json.tool .claude-plugin/plugin.json >/dev/null
 python3 -m json.tool .claude-plugin/marketplace.json >/dev/null

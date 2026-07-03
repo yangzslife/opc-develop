@@ -1,6 +1,0 @@
-interface:
-  display_name: "review-demo"
-  short_description: "Review the frontend prototype demo with an independent subagent"
-  default_prompt: "Use $review-demo to review the real frontend prototype demo with an independent review subagent."
-policy:
-  allow_implicit_invocation: true

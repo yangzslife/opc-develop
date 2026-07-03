@@ -15,7 +15,7 @@ opc-develop is a workflow suite for controlled AI-assisted product development. 
 Run these checks before submitting a change:
 
 ```bash
-python3 shared/scripts/test_opc_artifacts.py
+python3 shared/scripts/test_opc_scripts.py
 python3 -m json.tool .codex-plugin/plugin.json >/dev/null
 python3 -m json.tool .claude-plugin/plugin.json >/dev/null
 python3 -m json.tool .claude-plugin/marketplace.json >/dev/null

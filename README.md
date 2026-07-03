@@ -2,111 +2,133 @@
 
 [简体中文](README.zh-CN.md)
 
-opc-develop is a Codex / Claude Code skill suite for controlled AI-assisted product development. It combines a Lite flow for small iterations, a Full flow for end-to-end product development, and Harness initialization/evaluation capabilities.
+opc-develop is a Claude Code / Codex skill suite for AI-assisted product development by builders
+who own the product, design, and engineering judgment themselves. It captures your taste in three
+artifacts (requirement, PRD + demo, technical design), hands execution to agents under mechanical
+gates, and — unlike most workflow suites — **measures its own loop** so the process can shrink as
+the data justifies it.
 
 ![OPC-Develop skills workflow](assets/opc-develop-skills.png)
 
-## Highlights
+## Design Principles (v0.2)
 
-- Adapts output language to the user's input instead of enforcing a fixed default language.
-- Builds real frontend prototype demos before PRD and technical design.
-- Classifies high-risk features early and requires risk spikes, thin-slice gates, and capability readiness before broad implementation.
-- Maintains explicit demo parity, frontend mock inventory, and prototype mock retirement.
-- Uses independent review gates before downstream artifacts and implementation.
-- Treats Harness as a first-class concern: documentation, testcases, runtime evidence, mock/storage readiness, local E2E, and release verification are part of the workflow.
-- Labels verification realism so mock or seeded evidence is not reported as real-provider, human-accepted, or long-run validation.
-- Requires SaaS/infrastructure decisions in technical design; data storage choices must follow the target project's existing or explicitly approved architecture baseline, and unresolved high-impact choices block for human review.
+1. **Alignment by feedback, not feedforward.** Three nested loops: task-level evidence (TDD
+   RED/GREEN, evidence triangles), feature-level gates (fresh reviewers with rubrics, SHA-based
+   freshness), and loop-level measurement (`retro` mines ledgers and proposes improvements).
+2. **Enforcement lives at the lowest layer.** Scripts and structural validation (L0) over
+   pulled-on-demand artifacts (L1) over prose (L2). One always-loaded core contract (~1k tokens);
+   everything else loads per role.
+3. **Demo first: data fake, feeling real.** Taste is verified by experience. The prototype lives
+   in the real codebase; every mock is inventoried and retired before done.
+4. **Honest evidence.** Every verification claim carries an authenticity label (`mock passed` …
+   `long-run passed`). Missing harness capability caps the label instead of blocking the work.
+5. **Fail open with recorded gaps.** Bare repositories work. Only destructive actions fail closed.
+6. **Self-evolution.** Resolved failures append to an error ledger; `retro` detects recurrences
+   and crystallizes rules at the lowest enforcement layer — with human approval and retirement
+   review.
 
-## Who It Is For
+## The Skills
 
-opc-develop is built for builders, especially OPC founders and solo operators, who personally own the product judgment, design taste, and engineering taste behind a project. It assumes the human user can evaluate whether a requirement is structurally sound, whether an interaction feels right, and whether an architecture is likely to age well.
+Full flow (one feature, four human touchpoints):
 
-**It is not a good fit for pure implementation roles, or for engineering work where the hard part is heavy team coordination, organizational negotiation, roadmap alignment, or cross-team dependency management.** This suite deliberately increases product and architecture scrutiny before implementation. If you expect the agent to replace product taste, design judgment, or engineering ownership, this workflow will feel too demanding.
+| Skill | Phase | You do |
+|---|---|---|
+| `brainstorm` | grilling → requirement.md | answer questions, confirm a 1-page decision summary |
+| `demo` | prototype in the real codebase | play with it until the feel is right |
+| `design` | PRD (AC-IDs) + technical (decision records) | read two decision sheets, approve one-way doors |
+| `contract` | implementation contracts (spec+plan merged) | — |
+| `build` | TDD implementation via subagents | — |
+| `verify` | black-box E2E, evidence triangles, acceptance sheet | spot-check and give a verdict |
+| `ship` | release gates, deploy, rollback readiness, branch cleanup | confirm the deploy |
 
-## Operating Philosophy
+Always available:
 
-opc-develop is prototype-driven development for AI-assisted builders. The human stays responsible for context, taste, product structure, and architectural direction. The agent does the exhausting execution work once the direction is sharp enough.
+- `lite` — the 80% path: small changes, current branch, zero ceremony, bare-repo compatible.
+- `retro` — weekly loop-engineering report: token distribution, rework routing, recurring errors,
+  rule crystallization proposals.
+- `harness` — assess (by executing, not reading) and build the project's run/reset/observe/drive
+  capabilities: seeds, agent-legible logs, state dumps, E2E scaffolding.
 
-The intended operating loop:
+## Feedback Model
 
-0. **Initialize the Harness first.** Use `harness-init` and `harness-eval` to make the target project legible to AI: project rules, documentation standards, local runbooks, runtime evidence, logs, database access, traces, API mocks, storage mocks, risk readiness, thin-slice gates, testing gates, release flow, and acceptance rules.
-1. **Give the agent the raw idea and let it grill you.** Start with `product-brainstorm`; keep answering hard questions until the feature becomes a clear `requirement.md` with domain language, goals, non-goals, tradeoffs, constraints, and acceptance signals.
-2. **Design a real UI demo inside the existing project.** Use `create-demo` or `build-demo` to build a high-fidelity frontend prototype against frontend-only mocks. Then keep vibe-coding and reviewing the interaction until it matches your product taste.
-3. **Design and review the PRD and technical plan.** Use `build-prd`, `build-technical`, or `loop-design`, then review the artifacts seriously. This is where product structure, runtime assumptions, and engineering architecture are protected from drifting in the wrong direction. **If you cannot judge product structure or architecture depth, stop here; opc-develop is not the right workflow for you yet.**
-4. **Hand implementation, testing, and release to AI with confidence.** Once the design is approved, use `loop-develop`, `local-e2e-verify`, and `release-verify` to let the agent handle implementation, unit/API tests, black-box tests, local E2E, release checks, and rollback readiness. Codex Computer Use is strongly recommended for black-box browser verification. The human should focus on final acceptance and product-quality judgment.
+All human feedback classifies as **tune** (iterate in place, free), **revise** (route to the
+earliest broken layer, cascade staleness via content-SHA checks), or **park**. Acceptance
+rejections triage into implementation defect / artifact defect / taste change — the last is a new
+increment, never rework.
 
-## Contents
+## Ledgers
 
-- `.agents/plugins/marketplace.json` - Codex repository marketplace manifest.
-- `.codex-plugin/plugin.json` - Codex plugin manifest.
-- `.claude-plugin/plugin.json` - Claude Code plugin manifest.
-- `skills/` - atomic and orchestration skills.
-- `agents/` - Claude Code custom subagents for OPC review and implementation roles.
-- `shared/references/` - shared contracts, formats, and process rules.
-- `shared/prompts/` - reviewer and implementer subagent prompts.
-- `shared/scripts/` - small artifact validation helpers.
-- `docs/` - platform-specific usage notes.
-- `SECURITY.md` and `CONTRIBUTING.md` - public distribution and contribution policies.
+Every gate outcome, rework routing, evidence label, and gap appends to
+`docs/features/<slug>/ledger.jsonl`; resolved failures append root causes to
+`docs/opc/error-ledger.jsonl`. `retro` turns these into decisions: which gates to downgrade,
+which rules to crystallize, which artifact layers earn their cost.
 
-## Main Flows
+## Platform Notes
 
-- `lite-develop` - controlled small or medium-low-risk current-branch development.
-- `product-brainstorm` - early feature clarification, domain language, alternatives, tradeoffs, and requirement capture.
-- `loop-design` - demo, PRD, and technical design review loop.
-- `loop-develop` - spec, testcases, plan, TDD implementation, and local verification loop.
-- `harness-init` - guided Harness initialization planning.
-- `harness-eval` - reusable Harness maturity scoring.
-- `release-verify` - release gates, post-release checks, and rollback readiness.
+- **Claude Code**: full support. Reviews and implementation run in isolated subagents
+  (`opc-reviewer` is read-only by tool restriction).
+- **Codex / other harnesses**: skills work; where isolated subagents are unavailable, gates and
+  builds degrade honestly (`self-reviewed (no isolation)` labels surfaced at the next human
+  touchpoint) instead of blocking or silently self-approving.
 
 ## Install
 
-### Codex
+### Claude Code
 
-Use this repository as a Codex plugin marketplace:
+```bash
+claude --plugin-dir ~/plugins/opc-develop
+```
+
+Skills are invoked with the plugin namespace, e.g. `/opc-develop:brainstorm`,
+`/opc-develop:lite`, `/opc-develop:retro`. See [docs/claude-code.md](docs/claude-code.md).
+
+### Codex
 
 ```bash
 codex plugin marketplace add wallkop/opc-develop --ref main
 codex plugin add opc-develop@opc-develop
 ```
 
-For local development, clone it into your Codex personal plugin source directory and enable the `opc-develop` personal plugin in Codex.
+## Layout
 
-```bash
-git clone https://github.com/wallkop/opc-develop.git ~/plugins/opc-develop
-```
+- `skills/` — the 10 skills.
+- `shared/core-contract.md` — the one always-loaded contract.
+- `shared/packs/` — role-specific rule packs, loaded on demand.
+- `shared/formats/` — artifact format specs (requirement, PRD, technical, impl-contract, ledger).
+- `shared/rubrics/` — gate rubrics; given to reviewers in full.
+- `shared/scripts/` — L0 tooling: ledger append/summary, SHA freshness, status parsing, artifact
+  validation, recurrence scan, feature slugs. Stdlib-only; `test_opc_scripts.py` covers them.
+- `agents/`, `shared/prompts/` — reviewer and implementer subagent definitions.
 
-If your Codex setup uses a different personal plugin source directory, clone the repository there instead. Keep this repository as the source of truth and let Codex install/cache from it.
+## Migrating from v0.1
 
-### Claude Code
+| v0.2 | absorbs (v0.1) |
+|---|---|
+| `brainstorm` | product-brainstorm |
+| `demo` | create-demo, review-demo, build-demo |
+| `design` | create/review/build-prd, create/review/build-technical, loop-design |
+| `contract` | create/review-spec, create/review-testcases, create/review-plan |
+| `build` | tdd-coding, debug-failure, loop-develop |
+| `verify` | local-e2e-verify, acceptance-rework |
+| `ship` | release-verify, finish-branch |
+| `lite` | lite-develop |
+| `retro` | — (new) |
+| `harness` | harness-init, harness-eval |
 
-Use the same repository as a Claude Code plugin source:
+v0.1 feature artifacts remain readable; new features use the v0.2 artifact formats
+(`shared/formats/`).
 
-```bash
-claude --plugin-dir ~/plugins/opc-develop
-```
+## Who It Is For
 
-Claude Code skills are invoked with the plugin namespace, for example `/opc-develop:product-brainstorm` or `/opc-develop:harness-eval`.
-
-See [docs/claude-code.md](docs/claude-code.md) for details.
-
-## Update
-
-Peers should update from Git tags or the default branch:
-
-```bash
-cd ~/plugins/opc-develop
-git pull --ff-only
-```
-
-After updating, restart Codex or Claude Code, or reload plugins if your client requires it.
-
-## Publishing And Discovery
-
-GitHub is the canonical source for history, tags, diffs, issues, and release notes. SkillHub, Claude marketplace, Codex marketplace, and similar directories are better used as discovery surfaces that link back to this repository.
+Builders — especially solo operators — who can judge whether a requirement is sound, an
+interaction feels right, and an architecture will age well. The suite protects those judgments;
+it does not replace them. If you want an agent to own product taste for you, this is the wrong tool.
 
 ## Safety Notes
 
-This repository should not contain project-specific business artifacts, credentials, private logs, `.env` files, or generated feature documents. Keep requirement-specific outputs inside the target project repository, not inside this plugin.
+Keep feature artifacts, ledgers, credentials, and logs in the target project repository — never
+in this plugin. Deploys, force-pushes, deletions, and external publication always require explicit
+human confirmation.
 
 ## License
 

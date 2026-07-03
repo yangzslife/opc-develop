@@ -1,4 +1,0 @@
-interface:
-  display_name: "tdd-coding"
-  short_description: "Run unit-test and API-test driven implementation with subagents"
-  default_prompt: "Use $tdd-coding to run UT/API TDD implementation from the spec, plan, and black-box testcase references."

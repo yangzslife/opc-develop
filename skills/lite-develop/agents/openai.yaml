@@ -1,4 +1,0 @@
-interface:
-  display_name: "lite-develop"
-  short_description: "Quickly implement and verify small changes on the current branch"
-  default_prompt: "Use $lite-develop to handle this small request on the current branch; edit directly for simple work or create a temporary worktree when needed."

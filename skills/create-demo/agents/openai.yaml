@@ -1,6 +1,0 @@
-interface:
-  display_name: "create-demo"
-  short_description: "Create a real frontend prototype demo"
-  default_prompt: "Use $create-demo to build a high-fidelity prototype demo directly in the real frontend codebase from approved requirements."
-policy:
-  allow_implicit_invocation: true

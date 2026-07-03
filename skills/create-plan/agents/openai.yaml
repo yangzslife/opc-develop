@@ -1,6 +1,0 @@
-interface:
-  display_name: "create-plan"
-  short_description: "Create a parallelizable implementation plan tree"
-  default_prompt: "Use $create-plan to create a plan tree after testcase review is approved."
-policy:
-  allow_implicit_invocation: true

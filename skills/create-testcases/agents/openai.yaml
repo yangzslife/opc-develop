@@ -1,4 +1,0 @@
-interface:
-  display_name: "create-testcases"
-  short_description: "Create only black-box E2E, acceptance, and regression cases"
-  default_prompt: "Use $create-testcases to create only black-box E2E, acceptance, and regression testcases."

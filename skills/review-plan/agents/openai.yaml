@@ -1,6 +1,0 @@
-interface:
-  display_name: "review-plan"
-  short_description: "Review the plan tree with an independent subagent"
-  default_prompt: "Use $review-plan to review the plan tree with an independent review subagent."
-policy:
-  allow_implicit_invocation: true

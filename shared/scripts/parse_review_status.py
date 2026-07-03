@@ -1,31 +1,54 @@
 #!/usr/bin/env python3
-"""Parse an opc_develop review Markdown file and print its status."""
+"""Extract the status token (and Reviewed-SHA records) from a review file.
+
+Prints `Approved` or `Issues Found` on stdout. Exit codes:
+  0 Approved, 3 Issues Found, 1 malformed (zero or multiple status lines), 2 usage error.
+
+With --json, prints {"status": ..., "reviewed": [{"path":..., "sha":...}]}.
+"""
 
 from __future__ import annotations
 
+import argparse
+import json
 import re
 import sys
 from pathlib import Path
 
-
-STATUS_RE = re.compile(r"^\*\*Status:\*\*\s*(Approved|Issues Found)\s*$", re.I | re.M)
+STATUS_RE = re.compile(r"^\*\*Status:\*\*\s+(Approved|Issues Found)\s*$", re.M)
+REVIEWED_RE = re.compile(r"^Reviewed-SHA:\s+(?P<path>\S+)\s+(?P<sha>[0-9a-f]{7,40})\s*$", re.M)
 
 
 def main() -> int:
-    if len(sys.argv) != 2:
-        print("usage: parse_review_status.py <review.md>", file=sys.stderr)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("review")
+    parser.add_argument("--json", action="store_true")
+    args = parser.parse_args()
+
+    path = Path(args.review)
+    if not path.exists():
+        print(f"ERROR: no review file at {path}", file=sys.stderr)
         return 2
 
-    path = Path(sys.argv[1]).expanduser()
     text = path.read_text(encoding="utf-8")
-    matches = STATUS_RE.findall(text)
-    if len(matches) != 1:
-        print("expected exactly one status", file=sys.stderr)
+    statuses = STATUS_RE.findall(text)
+    if len(statuses) != 1:
+        print(
+            f"ERROR: expected exactly one '**Status:**' line, found {len(statuses)} in {path}",
+            file=sys.stderr,
+        )
         return 1
 
-    status = matches[0]
-    print("Approved" if status.lower() == "approved" else "Issues Found")
-    return 0
+    status = statuses[0]
+    if args.json:
+        reviewed = [
+            {"path": m.group("path"), "sha": m.group("sha")}
+            for m in REVIEWED_RE.finditer(text)
+        ]
+        print(json.dumps({"status": status, "reviewed": reviewed}))
+    else:
+        print(status)
+    return 0 if status == "Approved" else 3
 
 
 if __name__ == "__main__":

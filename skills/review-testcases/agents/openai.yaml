@@ -1,6 +1,0 @@
-interface:
-  display_name: "review-testcases"
-  short_description: "Review testcases with an independent subagent"
-  default_prompt: "Use $review-testcases to review testcase coverage with an independent review subagent."
-policy:
-  allow_implicit_invocation: true

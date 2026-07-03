@@ -29,10 +29,15 @@ claude --plugin-dir /path/to/opc-develop
 Then invoke skills by their Claude plugin namespace, for example:
 
 ```text
-/opc-develop:product-brainstorm
-/opc-develop:loop-design
-/opc-develop:harness-eval
+/opc-develop:brainstorm
+/opc-develop:lite
+/opc-develop:retro
 ```
+
+Skill files reference shared packs, rubrics, and scripts via `${CLAUDE_PLUGIN_ROOT}`, which Claude
+Code resolves to the installed plugin root. The `opc-reviewer` agent is tool-restricted to
+read-only verification (Read, Grep, Glob, Bash); the `opc-implementer` agent is unrestricted
+inside its contract boundary.
 
 ## Marketplace Source
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""输出下一个带编号的 opc-develop feature slug。"""
+"""Print the next numbered opc-develop feature slug."""
 
 from __future__ import annotations
 
@@ -38,11 +38,11 @@ def next_number(features_dir: Path) -> int:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("feature_name", help="候选 feature 名称或基础 slug")
+    parser.add_argument("feature_name", help="candidate feature name or base slug")
     parser.add_argument(
         "--features-dir",
         default="docs/features",
-        help="项目 feature 目录，默认使用当前工作目录下的 docs/features。",
+        help="project features directory (default: docs/features under the cwd)",
     )
     return parser.parse_args()
 
@@ -55,8 +55,8 @@ def main() -> int:
     legacy_dir = features_dir / feature_name
     if legacy_dir.exists():
         print(
-            f"ERROR: 存在同名无编号旧 feature 目录：{legacy_dir}。"
-            "创建编号 feature 前，请先确认是迁移该目录，还是继续使用旧目录。",
+            f"ERROR: an unnumbered legacy feature directory exists: {legacy_dir}. "
+            "Decide whether to migrate it or keep using it before creating a numbered feature.",
             file=sys.stderr,
         )
         return 1

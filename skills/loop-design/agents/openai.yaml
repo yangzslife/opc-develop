@@ -1,6 +1,0 @@
-interface:
-  display_name: "loop-design"
-  short_description: "Run the build-demo, build-prd, and build-technical design loop"
-  default_prompt: "Use $loop-design to take the requirement through demo, PRD, and technical design review approval."
-policy:
-  allow_implicit_invocation: true

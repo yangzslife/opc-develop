@@ -1,6 +1,0 @@
-interface:
-  display_name: "acceptance-rework"
-  short_description: "Triage rework after failed human acceptance"
-  default_prompt: "Use $acceptance-rework to process failed human acceptance feedback, record human-acceptance.md, and route to the correct rework entry point."
-policy:
-  allow_implicit_invocation: true

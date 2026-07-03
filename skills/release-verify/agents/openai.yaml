@@ -1,4 +1,0 @@
-interface:
-  display_name: "release-verify"
-  short_description: "Run release verification and post-release black-box checks"
-  default_prompt: "Use $release-verify to run release verification and post-release black-box acceptance after local verification; human acceptance records are optional risk context only."

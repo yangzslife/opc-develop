@@ -1,4 +1,0 @@
-interface:
-  display_name: "local-e2e-verify"
-  short_description: "Run local black-box E2E, acceptance, and regression verification"
-  default_prompt: "Use $local-e2e-verify to run local black-box E2E, acceptance, and regression verification after tdd-coding."

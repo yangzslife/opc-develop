@@ -1,4 +1,0 @@
-interface:
-  display_name: "finish-branch"
-  short_description: "Safely finish a branch, linked worktree, or detached HEAD"
-  default_prompt: "Use $finish-branch to inspect the current branch or worktree state and finish with merge, push, or handoff according to project rules."

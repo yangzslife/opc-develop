@@ -1,6 +1,0 @@
-interface:
-  display_name: "review-prd"
-  short_description: "Review the PRD and commit/push the feature branch when approved"
-  default_prompt: "Use $review-prd to review the PRD with an independent review subagent; if approved, commit and push the current feature branch."
-policy:
-  allow_implicit_invocation: true

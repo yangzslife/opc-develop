@@ -1,6 +1,0 @@
-interface:
-  display_name: "loop-develop"
-  short_description: "Run the approved development loop"
-  default_prompt: "Use $loop-develop to execute the approved technical development loop."
-policy:
-  allow_implicit_invocation: true

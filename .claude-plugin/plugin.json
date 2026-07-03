@@ -1,7 +1,7 @@
 {
   "name": "opc-develop",
-  "version": "0.1.5",
-  "description": "Language-adaptive product development workflow suite with Lite, Full, Harness, review, and release verification skills",
+  "version": "0.2.0",
+  "description": "Loop-engineering product development suite: taste-first design flow (brainstorm/demo/design), contract-based TDD build, evidence-labeled black-box verify, ledger-driven retro, and executable harness capabilities",
   "author": {
     "name": "wallkop",
     "email": "wallkop2026@zohomail.com"
@@ -13,9 +13,10 @@
     "skills",
     "product-development",
     "harness",
-    "prd",
+    "loop-engineering",
     "tdd",
-    "review",
-    "release"
+    "evidence",
+    "retro",
+    "e2e"
   ]
 }

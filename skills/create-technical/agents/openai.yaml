@@ -1,6 +1,0 @@
-interface:
-  display_name: "create-technical"
-  short_description: "Create a technical design"
-  default_prompt: "Use $create-technical to create the technical design after PRD review is approved."
-policy:
-  allow_implicit_invocation: true

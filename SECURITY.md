@@ -35,5 +35,5 @@ opc-develop is distributed as source. Before installing or updating, review:
 Run the local validation command before publishing changes:
 
 ```bash
-python3 shared/scripts/test_opc_artifacts.py
+python3 shared/scripts/test_opc_scripts.py
 ```

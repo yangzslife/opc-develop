@@ -1,6 +1,0 @@
-interface:
-  display_name: "review-technical"
-  short_description: "Review the technical design with an independent subagent"
-  default_prompt: "Use $review-technical to review the technical design with an independent review subagent."
-policy:
-  allow_implicit_invocation: true

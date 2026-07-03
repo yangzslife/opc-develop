@@ -1,0 +1,6 @@
+interface:
+  display_name: "lite"
+  short_description: "Small low-risk changes with zero ceremony"
+  default_prompt: "Use $lite for bug fixes, copy/layout tweaks, and small behavior changes on the current branch with targeted tests and before/after evidence. Escalates to the full flow on risk triggers."
+policy:
+  allow_implicit_invocation: true

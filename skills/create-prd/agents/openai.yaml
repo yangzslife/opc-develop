@@ -1,6 +1,0 @@
-interface:
-  display_name: "create-prd"
-  short_description: "Create a PRD"
-  default_prompt: "Use $create-prd to create a PRD after demo review is approved."
-policy:
-  allow_implicit_invocation: true

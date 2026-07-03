@@ -1,4 +1,0 @@
-interface:
-  display_name: "debug-failure"
-  short_description: "Reproduce, root-cause, and fix implementation failures"
-  default_prompt: "Use $debug-failure to reproduce the failure, identify root cause, add a minimal failing test, and fix the implementation defect."

@@ -1,6 +1,0 @@
-interface:
-  display_name: "product-brainstorm"
-  short_description: "Deeply question and capture product requirements"
-  default_prompt: "Use $product-brainstorm to challenge the raw requirement, capture domain language, tradeoffs, goals, non-goals, and acceptance signals, then assign the next {x}-{feature} directory."
-policy:
-  allow_implicit_invocation: true

@@ -1,6 +1,0 @@
-interface:
-  display_name: "build-prd"
-  short_description: "Run the create-prd and review-prd improvement loop"
-  default_prompt: "Use $build-prd to create, review, and iterate the PRD until approved or blocked."
-policy:
-  allow_implicit_invocation: true

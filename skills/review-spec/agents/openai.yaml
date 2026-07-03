@@ -1,6 +1,0 @@
-interface:
-  display_name: "review-spec"
-  short_description: "Review the spec with an independent subagent"
-  default_prompt: "Use $review-spec to review the spec with an independent review subagent."
-policy:
-  allow_implicit_invocation: true

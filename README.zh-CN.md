@@ -2,111 +2,109 @@
 
 [English](README.md)
 
-opc-develop 是一套面向受控 AI 辅助开发的 Codex / Claude Code skill 套件。它把小需求快速迭代的 Lite 流程、完整产品开发的 Full 流程，以及 Harness 初始化/评估能力组合在同一个插件里。
+opc-develop 是一套面向 AI 辅助产品开发的 Claude Code / Codex skill 套件，服务于那些自己对产品、
+设计和工程判断负责的 Builder。它把你的品味沉淀在三份产物里（requirement、PRD + demo、技术设计），
+把执行交给受机械化 gate 约束的 agent，并且——不同于多数 workflow 套件——**度量自身的流程闭环**，
+让流程随着数据的支撑而逐步收缩。
 
 ![OPC-Develop skills workflow](assets/opc-develop-skills.png)
 
-## 特点
+## 设计原则（v0.2）
 
-- 根据用户输入语言自适应输出，而不是固定使用某一种默认语言。
-- 在 PRD 和技术方案之前先做真实前端 prototype demo。
-- 提前识别高风险功能，并在大规模实现前要求 risk spike、薄竖切 gate 和 capability readiness。
-- 明确维护 demo parity、前端 mock inventory 和 prototype mock retirement。
-- 下游产物和实现前必须经过独立 review gate。
-- Harness 优先：文档、测试用例、runtime evidence、mock/storage readiness、本地 E2E、发布验证形成闭环。
-- 对验证结果打真实性标签，避免把 mock 或 seeded 证据误报成真实 provider、人工验收或长稳验证通过。
-- 技术设计阶段必须明确 SaaS / 基础设施决策；数据存储选择必须遵循目标项目既有或已明确批准的架构基线，高影响且未决的选型必须阻塞给人类 review。
+1. **靠反馈对齐，而非前馈。** 三层嵌套闭环：任务级证据（TDD RED/GREEN、证据三角）、
+   feature 级 gate（带 rubric 的全新 reviewer、基于 SHA 的新鲜度检查）、
+   闭环级度量（`retro` 挖掘 ledger 并提出改进建议）。
+2. **约束落在最低层。** 脚本和结构化校验（L0）优先于按需加载的产物（L1），产物优先于散文规则（L2）。
+   只有一份始终加载的核心契约（约 1k token）；其余内容按角色按需加载。
+3. **Demo 先行：数据是假的，感觉是真的。** 品味要靠体验来验证。prototype 直接放在真实代码库里；
+   每一个 mock 都登记在册，并在完成前全部退役。
+4. **诚实的证据。** 每一条验证结论都带真实性标签（`mock passed` … `long-run passed`）。
+   harness 能力缺失时只封顶标签等级，而不阻塞工作。
+5. **默认放行，记录缺口。** 裸仓库也能工作。只有破坏性操作默认拦截。
+6. **自我演化。** 已解决的失败会追加到 error ledger；`retro` 检测重复出现的问题，
+   并将规则固化到最低的约束层——需人类批准，并有退役复审。
 
-## 适合人群
+## Skills
 
-opc-develop 适合 Builder，尤其适合 OPC 创业者、超级个体和独立产品构建者。它默认你本人要对项目的产品判断、设计审美和工程品味负责：你需要判断需求结构是否成立、交互是否顺手、架构是否会长歪。
+Full 流程（一个 feature，四个人类介入点）：
 
-**它不适合纯研发执行角色，也不适合主要难点在重团队协调、组织博弈、路线对齐或跨团队依赖管理的研发工作。** 这套 workflow 会在实现前故意加重产品和架构审查。如果你期待 AI 代替你的产品 taste、设计判断或工程 owner 意识，这套 skill 会显得过于苛刻。
+| Skill | 阶段 | 你要做的 |
+|---|---|---|
+| `brainstorm` | 拷打式追问 → requirement.md | 回答问题，确认一页纸决策摘要 |
+| `demo` | 在真实代码库里做 prototype | 反复把玩，直到感觉对了 |
+| `design` | PRD（AC-ID）+ 技术设计（决策记录） | 读两份决策清单，批准单向门决策 |
+| `contract` | 实现契约（spec+plan 合并） | — |
+| `build` | 通过 subagent 做 TDD 实现 | — |
+| `verify` | 黑盒 E2E、证据三角、验收清单 | 抽查并给出结论 |
+| `ship` | 发布门禁、部署、回滚就绪、分支清理 | 确认部署 |
 
-## 核心思想
+随时可用：
 
-opc-develop 是原型驱动开发。人类负责上下文、品味、产品结构和架构方向；当方向足够清晰后，把繁重执行交给 AI。
+- `lite` — 80% 场景的路径：小改动、当前分支、零仪式感，兼容裸仓库。
+- `retro` — 每周的流程工程报告：token 分布、返工路由、重复错误、规则固化提案。
+- `harness` — 评估（靠实际执行而非阅读）并建设项目的 run/reset/observe/drive 能力：
+  seed、agent 可读的日志、状态导出、E2E 脚手架。
 
-推荐使用方式：
+## 反馈模型
 
-0. **先做 Harness 初始化。** 用 `harness-init` 和 `harness-eval` 让目标项目对 AI 足够透明：项目规则、文档规范、本地启动手册、runtime evidence、日志、数据库访问、trace、API mock、storage mock、risk readiness、薄竖切 gate、测试门禁、发布流程和验收规则都要尽量补齐。
-1. **把原始想法交给 AI，然后持续被它拷打。** 从 `product-brainstorm` 开始，不断回答追问，直到沉淀出清晰的 `requirement.md`，包括领域语言、目标、非目标、方案取舍、约束和验收信号。
-2. **在已有真实项目上设计 UI demo。** 用 `create-demo` 或 `build-demo` 直接在真实前端代码里做高保真 prototype，后端行为先用纯前端 mock。然后持续 vibe-coding 和 review，直到交互符合你的产品品味。
-3. **设计并审核 PRD 和技术方案。** 用 `build-prd`、`build-technical` 或 `loop-design` 推进产物，然后认真 review。这个阶段用于防止产品结构走歪、运行时假设被埋掉、工程架构长歪。**如果你不具备产品结构化思维和架构深度，请在这里退出；opc-develop 暂时不适合你。**
-4. **把开发、测试和发布大胆交给 AI。** 设计确认后，用 `loop-develop`、`local-e2e-verify` 和 `release-verify` 让 AI 处理实现、Unit/API 测试、黑盒测试、本地 E2E、发布检查和回滚准备。黑盒浏览器验证强烈推荐使用 Codex Computer Use。人类重点负责最后验收和产品质量判断。
+所有人类反馈分为三类：**tune**（原地迭代，零成本）、**revise**（路由到最早出错的层，
+通过内容 SHA 检查级联标记过期）、**park**（搁置）。验收驳回会分诊为：实现缺陷 / 产物缺陷 /
+品味变化——最后一种是新的增量，永远不算返工。
 
-## 内容
+## Ledger
 
-- `.agents/plugins/marketplace.json` - Codex repo marketplace manifest。
-- `.codex-plugin/plugin.json` - Codex 插件 manifest。
-- `.claude-plugin/plugin.json` - Claude Code 插件 manifest。
-- `skills/` - 原子 skill 和编排 skill。
-- `agents/` - Claude Code 自定义 subagents，用于 OPC review 和 implementation 角色。
-- `shared/references/` - 共享契约、格式和流程规则。
-- `shared/prompts/` - reviewer 和 implementer subagent prompt。
-- `shared/scripts/` - 小型产物校验脚本。
-- `docs/` - 平台使用说明。
-- `SECURITY.md` 和 `CONTRIBUTING.md` - 公开分发与贡献策略。
+每一次 gate 结果、返工路由、证据标签和缺口都会追加到
+`docs/features/<slug>/ledger.jsonl`；已解决的失败会把根因追加到
+`docs/opc/error-ledger.jsonl`。`retro` 把这些数据转化为决策：哪些 gate 该降级、
+哪些规则该固化、哪些产物层配得上它的成本。
 
-## 主要流程
+## 平台说明
 
-- `lite-develop` - 在当前分支处理小型或中低风险开发。
-- `product-brainstorm` - 早期需求澄清、领域语言、方案取舍、目标/非目标和验收信号沉淀。
-- `loop-design` - demo、PRD、technical design 的设计闭环。
-- `loop-develop` - spec、testcases、plan、TDD implementation 和 local verification 的开发闭环。
-- `harness-init` - 引导式 Harness 初始化规划。
-- `harness-eval` - 可复用的 Harness 成熟度评分。
-- `release-verify` - 发布门禁、发布后验证和回滚就绪检查。
+- **Claude Code**：完整支持。review 和实现在隔离的 subagent 中运行
+  （`opc-reviewer` 通过工具限制强制只读）。
+- **Codex / 其他 harness**：skill 可用；在没有隔离 subagent 的环境里，gate 和构建会诚实降级
+  （`self-reviewed (no isolation)` 标签会在下一个人类介入点被明确呈现），
+  而不是阻塞或默默自我批准。
 
 ## 安装
 
-### Codex
+### Claude Code
 
-把这个仓库作为 Codex plugin marketplace 使用：
+```bash
+claude --plugin-dir ~/plugins/opc-develop
+```
+
+skill 通过 plugin namespace 调用，例如 `/opc-develop:brainstorm`、
+`/opc-develop:lite`、`/opc-develop:retro`。详见 [docs/claude-code.md](docs/claude-code.md)。
+
+### Codex
 
 ```bash
 codex plugin marketplace add wallkop/opc-develop --ref main
 codex plugin add opc-develop@opc-develop
 ```
 
-本地开发时，把这个仓库作为版本源，克隆到你的 Codex personal plugin source 目录，并在 Codex 中启用 `opc-develop` personal plugin。
+## 目录结构
 
-```bash
-git clone https://github.com/wallkop/opc-develop.git ~/plugins/opc-develop
-```
+- `skills/` — 10 个 skill。
+- `shared/core-contract.md` — 唯一始终加载的契约。
+- `shared/packs/` — 按角色划分的规则包，按需加载。
+- `shared/formats/` — 产物格式规范（requirement、PRD、technical、impl-contract、ledger）。
+- `shared/rubrics/` — gate rubric；完整交给 reviewer。
+- `shared/scripts/` — L0 工具：ledger 追加/汇总、SHA 新鲜度、状态解析、产物校验、
+  重复问题扫描、feature slug。仅依赖标准库；由 `test_opc_scripts.py` 覆盖。
+- `agents/`、`shared/prompts/` — reviewer 和 implementer subagent 定义。
 
-如果你的 Codex 使用其他 personal plugin source 目录，请克隆到对应目录。保持这个仓库作为 source of truth，让 Codex 从它安装或缓存。
+## 适合人群
 
-### Claude Code
-
-同一个仓库也可以作为 Claude Code plugin source：
-
-```bash
-claude --plugin-dir ~/plugins/opc-develop
-```
-
-Claude Code 中使用 plugin namespace 调用 skill，例如 `/opc-develop:product-brainstorm` 或 `/opc-develop:harness-eval`。
-
-更多说明见 [docs/claude-code.md](docs/claude-code.md)。
-
-## 更新
-
-Peers 可以从 Git tag 或默认分支更新：
-
-```bash
-cd ~/plugins/opc-develop
-git pull --ff-only
-```
-
-更新后，如你的 Codex 或 Claude Code 版本需要，请重启或重新加载插件。
-
-## 发布与发现
-
-GitHub 是历史、tag、diff、issue 和 release notes 的 canonical source。SkillHub、Claude marketplace、Codex marketplace 等目录站更适合做 discovery surface，并链接回这个仓库。
+Builder——尤其是独立开发者——需要能自己判断一个需求是否成立、一个交互是否顺手、
+一个架构是否经得起时间。这套套件保护的是这些判断，而不是代替它们。
+如果你希望 agent 替你掌管产品品味，那这不是适合你的工具。
 
 ## 安全说明
 
-这个仓库不应该包含项目业务产物、凭据、私有日志、`.env` 文件或生成后的 feature 文档。具体需求的输出应写入目标项目仓库，而不是写进这个插件。
+feature 产物、ledger、凭据和日志应保存在目标项目仓库里——绝不放进这个插件。
+部署、force-push、删除和对外发布永远需要人类明确确认。
 
 ## License
 
