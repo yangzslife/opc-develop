@@ -48,4 +48,4 @@ proceed-with-cap — do not silently lower the bar.
 ## Output
 
 Running prototype in the real codebase, `mock-inventory.md`, `prototype.md`, demo gate Approved,
-ledger entries. Next: `design`.
+ledger entries. Next: `prd`.

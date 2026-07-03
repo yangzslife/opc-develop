@@ -48,7 +48,7 @@ feels right, and whether an architecture will age well. The suite protects those
 does not replace them.
 
 **It is not a good fit** for pure implementation roles, or for work where the hard part is team
-coordination and roadmap negotiation. The suite deliberately concentrates human attention on four
+coordination and roadmap negotiation. The suite deliberately concentrates human attention on five
 decision points; if you cannot judge product structure or architecture depth at those points, the
 workflow will feel demanding rather than helpful.
 
@@ -72,20 +72,28 @@ The intended operating loop:
 2. **Experience it before specifying it** (`demo`). The agent builds a prototype inside the real
    frontend (or a runnable skeleton for non-UI features) against frontend-only mocks. You play
    with it; the tune-loop is free and unlimited. Cheap `revise` here beats expensive rework later.
-3. **Sign the two decision sheets** (`design`). The agent writes the full PRD (numbered ACs,
-   state machine, permissions) and technical design (ADR-style TD records, public contracts,
-   runtime evidence plan); you read only the decision surfaces and explicitly approve anything
-   tagged `[ONE-WAY]`. Contested choices arrive with options, tradeoffs, a recommendation,
-   reversibility, and the cost of deferring — or they don't arrive at all.
-4. **Hand off execution with confidence** (`contract` → `build` → `verify`). Work is partitioned
-   into self-sufficient implementation contracts; implementer subagents run TDD with captured
-   RED/GREEN evidence; every contract passes a merged compliance + quality review; black-box
-   verification assembles an evidence triangle (interface assertion + correlation-ID log chain +
-   state assertion) per AC and distills every important check into a committed spec.
-5. **Accept, ship, and measure** (`verify` touchpoint → `ship` → `retro`). You judge a one-line-
-   per-AC acceptance sheet with honest labels; rejection triage separates implementation defects,
-   artifact defects, and taste changes. `ship` releases with rollback readiness. `retro` closes
-   the loop weekly: where tokens went, which gates earn their keep, which mistakes repeat.
+3. **Sign the product decision sheet** (`prd`). The product owner — a PM, or you solo — turns
+   the experienced demo into a PRD with numbered ACs and PD decision records, signs the decision
+   sheet, and pushes the feature branch as the handoff.
+4. **Intake, then sign the architecture decision sheet** (`architect`). The architect pulls the
+   branch, runs intake (understand before designing; questions route back to the product owner
+   as `revise`, never self-answered), runs risk spikes, commits to one route in ADR-style TD
+   records, and explicitly approves anything tagged `[ONE-WAY]`. Contested choices arrive with
+   options, tradeoffs, a recommendation, reversibility, and the cost of deferring — or they
+   don't arrive at all.
+5. **Hand off execution with confidence** (`build`, which auto-runs `contract` first). Work is
+   partitioned into self-sufficient implementation contracts (gated for cold-reader
+   buildability); implementer subagents run TDD with captured RED/GREEN evidence; every contract
+   passes a merged compliance + quality review; `verify` assembles an evidence triangle
+   (interface assertion + correlation-ID log chain + state assertion) per AC and distills every
+   important check into a committed spec.
+6. **Accept, ship, and measure** (`verify` touchpoint → `ship` → `retro`). You judge a one-line-
+   per-AC acceptance sheet with honest labels. `ship` runs the staged release pipeline: release
+   manifest (DDL, env vars, config — collected from the diff, gated against technical.md) →
+   test-environment deploy → test acceptance → production with rollback readiness → online
+   regression. Rejections at any acceptance triage into implementation defects, artifact
+   defects, and taste changes. `retro` closes the loop weekly: where tokens went, which gates
+   earn their keep, which mistakes repeat.
 
 ## The Feedback Model
 
@@ -108,18 +116,35 @@ as rework). Attribution is the agent's job; arbitration is yours.
 |---|---|---|
 | `brainstorm` | raw idea → grilled, decision-first requirement + feature branch | ① confirm the 1-page summary |
 | `demo` | experienceable prototype in the real codebase + mock inventory | ② play until the feel is right |
-| `design` | PRD (AC-IDs) + technical design (TD records), both gated | ③ sign the decision sheets |
-| `contract` | partition into self-sufficient implementation contracts, gated | — |
-| `build` | dispatch implementers, TDD evidence, merged reviews, mock retirement, integration | — |
-| `verify` | agentic pass → Tier-1 specs, evidence triangles, acceptance sheet | ④ accept or reject |
-| `ship` | release gates, rollback readiness, deploy, branch cleanup | confirm the deploy |
+| `prd` | PRD (AC/PD ids), gated, then push = product→architecture handoff | ③ product sign-off |
+| `architect` | intake → risk spikes → technical design (TD records), gated | ④ architecture sign-off |
+| `contract` | partition into self-sufficient implementation contracts, gated (auto-run by `build`) | — |
+| `build` | auto-runs `contract` if needed; dispatch implementers, TDD evidence, merged reviews, mock retirement, integration | — |
+| `verify` | agentic pass → Tier-1 specs, evidence triangles, acceptance sheet | ⑤ accept or reject |
+| `ship` | release manifest → test env deploy → test acceptance → prod + online regression → branch cleanup | test acceptance + deploy confirm |
 | `lite` | small/low-risk changes on the current branch, zero ceremony, bare-repo OK | quick before/after check |
 | `retro` | weekly loop report + rule crystallization + gate pruning proposals | approve rules and prunings |
 | `harness` | score the four verbs by executing; build gaps as scripts/seeds/conventions | — |
 
+## Working With a PM
+
+The full flow supports a two-person split along the taste boundary:
+
+- **Product owner** runs `brainstorm` → `demo` → `prd` on the feature branch. `prd` ends by
+  pushing the branch and printing a handoff summary (ACs, open questions, risk profile, gaps).
+- **Architect/builder** pulls the branch and runs `architect` onward. It starts with an intake
+  pass — read the artifacts, exercise the demo, list understanding questions. Questions route
+  back to the product owner as `revise` entries (with an `actor` field in the ledger), never
+  silently self-answered.
+- Cross-role rework stays visible: `retro` attributes rework routing by actor, so you can see
+  whether defects trace to product capture or technical execution.
+
+Solo builders run the same two skills back-to-back; the intake step auto-skips when the same
+person just produced the PRD.
+
 ## Repository Layout
 
-- `skills/` — the 10 skills (each ≤ ~90 lines; detail lives in packs).
+- `skills/` — the 11 skills (each ≤ ~90 lines; detail lives in packs).
 - `shared/core-contract.md` — the one always-loaded contract: status tokens, evidence labels,
   feedback taxonomy, freshness, failure philosophy, ledger duty, isolation.
 - `shared/packs/` — nine on-demand rule packs (gate protocol, decision protocol, feedback
@@ -190,7 +215,8 @@ Restart Claude Code / Codex or reload plugins afterwards.
 |---|---|
 | `brainstorm` | product-brainstorm |
 | `demo` | create-demo, review-demo, build-demo |
-| `design` | create/review/build-prd, create/review/build-technical, loop-design |
+| `prd` | create/review/build-prd, loop-design (product half) |
+| `architect` | create/review/build-technical, loop-design (technical half) |
 | `contract` | create/review-spec, create/review-testcases, create/review-plan |
 | `build` | tdd-coding, debug-failure, loop-develop |
 | `verify` | local-e2e-verify, acceptance-rework |

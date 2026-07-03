@@ -1,6 +1,6 @@
 ---
 name: contract
-description: "Use after design sign-off to decompose the approved PRD and technical design into implementation contracts: self-sufficient per-workstream work orders (boundaries, internal design, TDD seeds, mock retirement, AC ownership) plus an index with dependencies, thin slice, and integration steps. Gates the contract tree before build."
+description: "Use after the architecture sign-off to decompose the approved PRD and technical design into implementation contracts: self-sufficient per-workstream work orders (boundaries, internal design, TDD seeds, mock retirement, AC ownership) plus an index with dependencies, thin slice, and integration steps. Gates the contract tree before build. Normally invoked automatically by build; run directly only to prepare or revise contracts without building."
 license: MIT
 ---
 

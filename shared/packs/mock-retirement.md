@@ -21,7 +21,7 @@ never a query-param-only alternate root app.
 ## Lifecycle
 
 1. **demo** creates the inventory alongside the prototype.
-2. **design** carries the inventory forward; the PRD's ACs must cover the real behavior each mock fakes.
+2. **prd** carries the inventory forward; the PRD's ACs must cover the real behavior each mock fakes.
 3. **contract** maps every `M-x` to an impl-contract boundary and a test seed. Unmapped mocks block
    the contract gate.
 4. **build** implementers replace or remove their assigned mocks and report per-mock actions.

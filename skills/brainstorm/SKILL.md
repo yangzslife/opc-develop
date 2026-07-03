@@ -28,7 +28,7 @@ judgment that is missing here.
    alternatives (2-3 when real choice exists), domain terms, constraints. Stop grilling when new
    questions stop changing the shape — shared understanding, not exhaustion.
 4. Classify the risk profile (`risk-readiness.md` categories, or `none identified`). Unknowns
-   become open questions owned by the design phase.
+   become open questions owned by `prd` or `architect`.
 5. Classify remaining open questions: any that could change scope, core behavior, or risk class
    must be resolved now; the rest get trigger conditions.
 6. When ready to commit: run

@@ -21,6 +21,9 @@ routes, and integrates.
 
 ## Process
 
+0. **Auto-chain**: if `docs/features/<slug>/contracts/` is missing, or its gate is stale against
+   the current PRD/technical revisions, run the `contract` skill first, then continue — one
+   invocation covers both phases since neither has a human touchpoint.
 1. Precheck: contract-gate freshness (`check_freshness.py`), readiness blockers from
    `risk-spike.md` (blocked verdicts stop only the affected contracts).
 2. Choose dispatch mode per `tdd-implement.md`: parallel ⇒ one worktree per implementer;

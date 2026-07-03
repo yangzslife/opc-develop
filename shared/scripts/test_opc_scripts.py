@@ -66,6 +66,19 @@ class TestLedger(unittest.TestCase):
                 self.assertEqual(res.returncode, 1, f"accepted bad entry: {entry}")
             self.assertFalse(ledger.exists())
 
+    def test_release_entries(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            ledger = Path(tmp) / "ledger.jsonl"
+            good = {"type": "release", "stage": "deploy-test", "result": "ok"}
+            res = run("opc_ledger.py", "append", "--ledger", str(ledger), "--json", json.dumps(good))
+            self.assertEqual(res.returncode, 0, res.stderr)
+            for bad in (
+                {"type": "release", "stage": "nope", "result": "ok"},
+                {"type": "release", "stage": "deploy-test", "result": "maybe"},
+            ):
+                res = run("opc_ledger.py", "append", "--ledger", str(ledger), "--json", json.dumps(bad))
+                self.assertEqual(res.returncode, 1, f"accepted bad entry: {bad}")
+
     def test_error_ledger_validation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             ledger = Path(tmp) / "error-ledger.jsonl"

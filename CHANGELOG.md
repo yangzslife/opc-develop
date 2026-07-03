@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.2.1 - 2026-07-03
+
+Collaboration split, build auto-chaining, and a staged release pipeline.
+
+- **`design` split into `prd` + `architect`** for PM/architect collaboration: `prd` ends with a
+  product sign-off and a pushed feature branch (handoff summary included); `architect` starts
+  with an intake pass (understand before designing; questions route back as `revise`, never
+  self-answered). Solo builders run both back-to-back; intake auto-skips. Touchpoints go 4 → 5.
+- **`build` auto-runs `contract`** when contracts are missing or stale against the current
+  PRD/technical revisions — one invocation covers both phases; `contract` remains directly
+  invocable for preparing or revising contracts without building.
+- **`ship` rebuilt as a staged release pipeline** with ledger-based resume: release manifest
+  (migrations/DDL with per-item rollback, env vars name-only, config, services, third-party,
+  backfills — collected from the diff and gated against technical.md; drift routes `revise`) →
+  test env changes + deploy (backup before DDL) → test-environment human acceptance (same
+  tune/revise/park + three-way triage) → production with rollback readiness and explicit
+  confirmation → online regression (`@prod-safe` Tier-1 subset, read-only evidence triangle) →
+  branch cleanup. New `packs/release-ops.md`; new `release` ledger entry type with stage
+  vocabulary; optional `actor` field on ledger entries for multi-person attribution.
+
 ## 0.2.0 - 2026-07-03
 
 Complete architectural rework: from prose-feedforward harness loop to measured feedback loops

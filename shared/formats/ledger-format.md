@@ -15,6 +15,7 @@ Common fields: `ts` (stamped by script), `feature`, `type`.
 {"type":"decision","id":"TD-2","door":"two-way","decided_by":"agent","note":"..."}
 {"type":"gap","verb":"observe","blocks":"correlation IDs missing","label_cap":"seeded passed"}
 {"type":"dispatch","contract":"C-01","mode":"worktree|serial","isolation":"subagent|self-implemented (no isolation)"}
+{"type":"release","stage":"deploy-test","result":"ok","evidence":"...","backup":"..."}
 {"type":"park","note":"...","reason":"..."}
 ```
 
@@ -26,6 +27,10 @@ Conventions:
   `ship` prechecks resolution by this rule.
 - Decision ids: `TD-n` for technical records, `PD-n` for PRD decision-sheet records,
   `RISK-PROFILE` for the brainstorm risk classification.
+- Any entry may carry an optional `actor` field (e.g. `"actor":"pm"`, `"actor":"architect"`) —
+  use it in multi-person features so `retro` can attribute rework routing by role.
+- `release` stages: `manifest` → `env-test` → `deploy-test` → `acceptance-test` → `env-prod` →
+  `deploy-prod` → `regression-prod` → `watch`; ship resumes after the last `ok` stage.
 
 ## Error ledger — `docs/opc/error-ledger.jsonl` (project-wide)
 

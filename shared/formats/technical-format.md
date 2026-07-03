@@ -43,6 +43,6 @@ Schema changes                        migrations forward + rollback note
 ## Rules
 
 - Exactly one committed route. Alternatives live in decision records' Options, not as parallel maybes.
-- Every `[ONE-WAY]` record requires explicit human approval at the design touchpoint.
+- Every `[ONE-WAY]` record requires explicit human approval at the architecture sign-off touchpoint.
 - Public contracts here are the single source of truth; impl-contracts reference, never redefine.
 - The Runtime Evidence Plan is mandatory: a design that cannot say how it will be observed is not done.

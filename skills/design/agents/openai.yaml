@@ -1,6 +1,0 @@
-interface:
-  display_name: "design"
-  short_description: "Produce and gate PRD + technical design"
-  default_prompt: "Use $design to write prd.md (decision sheet + AC-IDs) and technical.md (decision records, public contracts, runtime evidence plan), gate both, and run the design sign-off touchpoint."
-policy:
-  allow_implicit_invocation: true

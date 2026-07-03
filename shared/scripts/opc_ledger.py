@@ -25,7 +25,13 @@ FEATURE_TYPES = {
     "decision": {"id", "door"},
     "gap": {"verb", "blocks"},
     "dispatch": {"contract", "mode"},
+    "release": {"stage", "result"},
     "park": {"note"},
+}
+
+RELEASE_STAGES = {
+    "manifest", "env-test", "deploy-test", "acceptance-test",
+    "env-prod", "deploy-prod", "regression-prod", "watch",
 }
 
 EVIDENCE_LABELS = {
@@ -66,6 +72,11 @@ def validate(entry: dict, is_error_ledger: bool) -> str | None:
         return f"unknown evidence label {entry['label']!r}; allowed: {sorted(EVIDENCE_LABELS)}"
     if etype == "gate" and entry["status"] not in {"Approved", "Issues Found"}:
         return f"gate status must be 'Approved' or 'Issues Found', got {entry['status']!r}"
+    if etype == "release":
+        if entry["stage"] not in RELEASE_STAGES:
+            return f"unknown release stage {entry['stage']!r}; allowed: {sorted(RELEASE_STAGES)}"
+        if entry["result"] not in {"ok", "failed", "blocked"}:
+            return f"release result must be ok/failed/blocked, got {entry['result']!r}"
     return None
 
 

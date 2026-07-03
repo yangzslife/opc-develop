@@ -81,3 +81,4 @@ Read a pack only when your current role needs it:
 - `packs/risk-readiness.md` — risk categories, spikes, thin-slice gates.
 - `packs/branch-worktree.md` — branch rules, worktree mechanics, destructive-op confirmation.
 - `packs/harness-verbs.md` — run/reset/observe/drive standards; seed scenarios; E2E tiers.
+- `packs/release-ops.md` — release manifest, environment-change safety, online regression.
