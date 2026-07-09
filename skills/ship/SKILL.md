@@ -16,6 +16,7 @@ approval, code merged to the project trunk — the precondition `deploy` will ch
 - `${CLAUDE_PLUGIN_ROOT}/shared/packs/evidence.md`
 - `${CLAUDE_PLUGIN_ROOT}/shared/packs/feedback-routing.md`
 - `${CLAUDE_PLUGIN_ROOT}/shared/packs/branch-worktree.md`
+- For the touchpoint: `${CLAUDE_PLUGIN_ROOT}/shared/formats/report-style.md`
 
 ## Stages
 
@@ -35,8 +36,9 @@ diff moved.
 4. **regression-test**: run the Tier-1 suite against the test environment; evidence triangles
    with test-env labels; smoke the documented signals. Failures here are triaged before any
    human is summoned.
-5. **acceptance-test (touchpoint)**: hand the human the test-environment entry point, the
-   acceptance sheet, and the manifest. Route the verdict:
+5. **acceptance-test (touchpoint)**: render `reports/acceptance.html` (acceptance sheet +
+   manifest summary) per `formats/report-style.md`, then hand the human the test-environment
+   entry point, the acceptance sheet, and the manifest. Route the verdict:
    - **Approved** → next stage.
    - **Code defect** → re-enter **`build`** (fix mode) with the rejection notes; after build
      refreshes its evidence, ship resumes at stage 3.

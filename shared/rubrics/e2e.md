@@ -1,14 +1,20 @@
 # Rubric: E2E & acceptance readiness
 
 You are reviewing the verify stage's output: Tier-1 specs, the acceptance sheet
-(`docs/features/<slug>/acceptance.md`), and evidence. Inputs: prd.md (AC list), the spec files,
-test run outputs, the feature ledger's evidence entries. End with one `**Status:**` line and
-`Reviewed-SHA:` lines for the acceptance sheet and spec files.
+(`docs/features/<slug>/acceptance.md`), and evidence. Inputs: prd.md (AC list), testcases.md
+(TC list), the spec files, test run outputs, the feature ledger's evidence entries. End with one
+`**Status:**` line and `Reviewed-SHA:` lines for the acceptance sheet and spec files.
 
 ## Blocking checks
 
-1. **AC coverage**: every non-struck AC has ≥1 Tier-1 spec or a recorded, human-visible gap entry.
-   Coverage claims are verified by reading spec annotations, not the report.
+1. **AC coverage through the chain**: every non-struck AC traces AC → TC → green Tier-1 spec, or
+   carries a recorded, human-visible gap entry. Coverage claims are verified by reading spec
+   annotations, not the report.
+1b. **Skeleton provenance**: the specs proving ACs are the Phase A skeletons (TC-annotated, with
+   a captured acceptance-RED run predating implementation), turned green without weakened
+   assertions — diff the skeleton against its gated version; a loosened assertion ⇒ reject.
+   Specs without TC provenance are acceptable only when marked `explored` (distilled from the
+   gap hunt) — an unmarked test-after spec standing in for a TC ⇒ reject.
 2. **Seed declarations**: every spec declares its named seed scenario; specs that depend on
    leftover state from other specs ⇒ reject (non-deterministic).
 3. **Evidence triangle**: each `local real service passed` or higher claim has all three corners

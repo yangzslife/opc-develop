@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.3.0 - 2026-07-08
+
+ATDD restructuring driven by a live-project retro: acceptance now flows AC → TC → skeleton →
+green, seams have owners, Tier-1 sheds its UI-centrism, and every human touchpoint gets a
+rendered report.
+
+- **Black-box test cases as a gated PRD artifact** (`formats/testcase-format.md`, new):
+  `prd` now produces `testcases.md` alongside `prd.md` — numbered TCs in Given/When/Then, each
+  tracing to its AC-IDs and naming its seed scenario, gated together with the PRD at product
+  sign-off (`rubrics/prd.md` gains TC coverage/traceability checks). Test intent is now decided
+  where product intent is decided, not improvised at verification time.
+- **Build is now acceptance-first (ATDD)**: contracting (phase A) translates every non-struck TC
+  into a committed, failing Tier-1 skeleton *before any implementer is dispatched*, capturing an
+  acceptance-RED run. Skeletons are fixed once gated — implementation makes them pass; a wrong
+  skeleton means a wrong TC and routes `revise` to `prd`. Local verify (phase C) runs the
+  skeletons first as the primary acceptance signal, then hunts gaps beyond them and distills
+  discoveries into `explored` specs. `rubrics/impl-contract.md` and `rubrics/e2e.md` enforce
+  skeleton coverage, fidelity, provenance, and unweakened assertions end to end.
+- **Cross-contract seams have an owner**: TDD seeds declare a level (`unit`/`api`/`e2e`);
+  implementers may not downgrade an `api` seed to a unit test against their own mock. The
+  contract index names an `api`-level boundary case for every technical.md contract produced by
+  one contract and consumed by another, and the build controller — not any implementer — runs
+  them at integration. A seam proven only by two sides' mocks of each other is rejected at the
+  contract gate.
+- **Tier-1 de-UI-centralized** (`harness-verbs.md`): Tier-1 is defined by the interface the
+  feature exposes — HTTP/API suites, CLI invocations, or browser specs. Playwright is one
+  driver, not the definition; API features proven only through a UI detour are called out as
+  fragile coverage.
+- **HTML reports at every human touchpoint** (`formats/report-style.md`, new): requirement,
+  PRD + test cases, technical design, and ship acceptance each render a self-contained,
+  uniformly styled HTML companion (`docs/features/<slug>/reports/`). Markdown stays the review
+  target and the hash source; reports regenerate whenever the gated md changes.
+
 ## 0.2.3 - 2026-07-03
 
 Hardening pass driven by an external structural review: chain of custody, gate-chain L0

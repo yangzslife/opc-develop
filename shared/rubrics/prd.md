@@ -1,7 +1,8 @@
-# Rubric: prd.md
+# Rubric: prd.md + testcases.md
 
-You are reviewing a PRD against `formats/prd-format.md`, requirement.md, the approved demo, and
-the mock inventory. End with one `**Status:**` line and `Reviewed-SHA:` lines per reviewed file.
+You are reviewing a PRD and its black-box test cases against `formats/prd-format.md`,
+`formats/testcase-format.md`, requirement.md, the approved demo, and the mock inventory. End with
+one `**Status:**` line and `Reviewed-SHA:` lines per reviewed file (prd.md and testcases.md).
 
 ## Blocking checks
 
@@ -21,6 +22,15 @@ the mock inventory. End with one `**Status:**` line and `Reviewed-SHA:` lines pe
 9. **Edge cases mapped**: each edge case maps to an AC or an explicit out-of-scope note.
 10. **Living-spec consistency**: when `docs/opc/specs/` exists, check the owning domain's AC
     registry — a new AC contradicting a live one without a declared supersession is blocking.
+11. **TC coverage, both directions**: every non-struck AC has ≥1 TC in the coverage map; every TC
+    references ≥1 existing AC. Verify against the Cases section, not the map alone.
+12. **TC quality**: each case is black-box (no internals, no implementation vocabulary), has a
+    concrete Given/When/Then whose `Then` includes the resulting state (not only the screen),
+    declares its `level` (`api`/`ui-e2e`), and names a seed scenario. A case that cannot name its
+    world ⇒ reject.
+13. **Level fitness**: `ui-e2e` is used only where the AC's observable is the UI itself; an AC
+    provable at `api` level carried as `ui-e2e` only ⇒ flag (brittleness), missing `api` coverage
+    for API-observable ACs ⇒ reject.
 
 ## Non-blocking
 

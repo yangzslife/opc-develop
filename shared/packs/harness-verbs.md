@@ -37,9 +37,12 @@ drive it from the outside, and observe what actually happened inside. Capabiliti
 
 ## L4 — drive (black-box E2E, two tiers)
 
-- **Tier 1 — scripted (the regression backbone):** committed Playwright (or equivalent) specs,
-  headless, CI-runnable, each annotated with the AC-IDs it proves and the seed it stands on.
-  Deterministic gates run on every change.
+- **Tier 1 — scripted (the regression backbone):** committed black-box specs driven at whatever
+  interface the feature actually exposes — HTTP/API suites for services, CLI invocations for
+  tools, Playwright (or equivalent) for UI. Browser tooling is *one driver*, not the definition;
+  an API feature proven only through a UI detour is fragile coverage. Headless, CI-runnable,
+  each spec annotated with the AC-IDs it proves and the seed it stands on. Deterministic gates
+  run on every change.
 - **Tier 2 — agentic (exploration and distillation):** the agent drives the app interactively to
   verify new behavior, check demo parity, and *author* Tier-1 specs. Rule: every agentic
   verification that matters is distilled into a Tier-1 spec — ephemeral intelligence becomes a

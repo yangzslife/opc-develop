@@ -16,6 +16,7 @@ duo the architect was not in the room when the requirement and PRD were shaped.
 - `${CLAUDE_PLUGIN_ROOT}/shared/packs/decision-protocol.md`
 - `${CLAUDE_PLUGIN_ROOT}/shared/packs/risk-readiness.md`
 - For the gate: `packs/gate-protocol.md` + `rubrics/technical.md`
+- For the touchpoint: `${CLAUDE_PLUGIN_ROOT}/shared/formats/report-style.md`
 
 ## Process
 
@@ -34,9 +35,10 @@ duo the architect was not in the room when the requirement and PRD were shaped.
    the architecture baseline; divergence is a `[ONE-WAY]` TD record.
 4. Gate it (fresh reviewer, `rubrics/technical.md`, L0 precheck). Fix-and-re-gate until
    Approved. Ledger each round.
-5. **Architecture sign-off touchpoint**: present the TD decision sheet to the human architect.
+5. **Architecture sign-off touchpoint**: render `reports/technical.html` per
+   `formats/report-style.md`, then present the TD decision sheet to the human architect.
    Every `[ONE-WAY]` record needs an explicit yes; questions get evidence-backed answers or
-   become decision-spikes. Feedback routes tune/revise/park.
+   become decision-spikes. Feedback routes tune/revise/park; report regenerates with the md.
 6. Commit and push the updated feature branch.
 
 ## Fail-open

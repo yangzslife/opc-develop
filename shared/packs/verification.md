@@ -17,16 +17,26 @@ Prove the feature black-box on the local stack before anything leaves the machin
   two *features* building at once — the PM/architect duo case.)
 - Missing verbs ⇒ record `gap` entries and note the label caps they force.
 
-## Agentic Pass → Distillation
+## Tier-1 First (skeletons → green)
 
-- Drive the running app through every AC — browser tooling for UI, real requests for APIs.
+- Run the full Tier-1 suite: the Phase A skeletons plus all pre-existing regression specs.
+  Capture output and exit codes. The skeletons turning green is the feature's primary acceptance
+  signal — they were written from the approved test cases before implementation existed.
+- A skeleton that cannot go green without weakening its assertion is a triage, not an edit:
+  implementation defect (fix the code) vs testcase artifact defect (`revise` to `prd`, stale
+  cascade). Nobody edits a skeleton to make it pass.
 - Per AC, assemble the evidence triangle: interface assertion, correlation-ID log chain, state
   assertion. Record per-AC `evidence` ledger entries with honest labels.
-- Distill every AC-proving interaction into a committed Tier-1 spec annotated with its AC-IDs
-  and named seed. Run the full Tier-1 suite including pre-existing regression specs; capture
-  output and exit codes.
+
+## Agentic Gap Hunt → Distillation
+
+- With the cases green, drive the running app *beyond* them — browser tooling for UI, real
+  requests for APIs: unlisted paths, hostile inputs, state left by one case entering another.
 - Demo parity: exercise the contractual interactions from PRD Demo alignment; divergence is a
   finding — triage implementation defect vs artifact defect, don't assume.
+- Distill every discovery that matters into an additional committed Tier-1 spec annotated with
+  its AC-IDs, named seed, and an `explored` marker (it proves behavior the cases missed —
+  candidate TCs for testcases.md next revision).
 
 ## Acceptance Sheet
 

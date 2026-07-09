@@ -18,10 +18,11 @@ dispatch. There is no third option; do not weigh "conflict risk" per case.
 
 ## Dispatch Context
 
-Each implementer receives: its impl-contract file path, the AC-IDs it owns, paths (not full text)
-to PRD/technical sections it needs, relevant mock-retirement entries, project rules (AGENTS.md),
-allowed commands, and its work directory. Point to artifacts by path + section; do not paste full
-documents into the prompt.
+Each implementer receives: its impl-contract file path, the AC-IDs it owns, the declared level of
+each TDD seed (`unit`/`api`/`e2e` — the implementer honors the level, it does not downgrade an
+`api` seed to a unit test against its own mock), paths (not full text) to PRD/technical sections
+it needs, relevant mock-retirement entries, project rules (AGENTS.md), allowed commands, and its
+work directory. Point to artifacts by path + section; do not paste full documents into the prompt.
 
 ## Implementer Protocol
 
@@ -48,6 +49,10 @@ error-ledger (see `formats/ledger-format.md`) — resolution time is capture tim
 ## Integration
 
 When all contracts are done, the controller performs the integration steps from the impl-contract
-index, runs implementation-facing checks, and runs the final mock-residual audit when any prototype
-mock existed (fresh reviewer + grep/static evidence per `mock-retirement.md`). Black-box E2E,
-acceptance, and regression belong to `build`'s local-verification phase (`verification.md`), not here.
+index — **including every `api`-level boundary case the index names for cross-contract seams**.
+Seam cases are the controller's to run, not any single implementer's: a seam that both sides only
+ever exercised through mocks of each other is unverified until its boundary case passes against
+the real interfaces. Then run implementation-facing checks and the final mock-residual audit when
+any prototype mock existed (fresh reviewer + grep/static evidence per `mock-retirement.md`).
+Black-box E2E, acceptance, and regression belong to `build`'s local-verification phase
+(`verification.md`), not here.
